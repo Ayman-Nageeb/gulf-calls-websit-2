@@ -7,9 +7,10 @@
       </h1>
       <v-card
         outlined
-        class="pa-6 title mt-8"
+        class="pa-6 title mt-8 text-justify"
         v-animate-onscroll="{ down: 'animate__animated animate__zoomIn' }"
         style="color: #1595b2"
+
       >
         To estimate the long-term association between changes in TG levels and
         the achievements of non-HDL-C in patients with very high CV risk (DM or
@@ -22,7 +23,7 @@
         <v-col>
           <v-card
             outlined
-            class="pa-6 title mt-8"
+            class="pa-6 title mt-8 text-justify"
             v-animate-onscroll="{ down: 'animate__animated animate__zoomIn' }"
             height="200px"
           >
@@ -34,7 +35,7 @@
         <v-col>
           <v-card
             outlined
-            class="pa-6 title mt-8"
+            class="pa-6 title mt-8 text-justify"
             v-animate-onscroll="{ down: 'animate__animated animate__zoomIn' }"
             height="200px"
           >

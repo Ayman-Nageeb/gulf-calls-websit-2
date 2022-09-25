@@ -19,7 +19,7 @@
               Oman, Kuwait, UAE, Bahrain, Qatar
               <v-spacer></v-spacer>
             </v-card-title>
-            <v-card-text class="mt-3 title">
+            <v-card-text class="mt-3 title text-justify">
               <div>
                 The Gulf TriglyCeride And ResiduaL CardiovascuLar RiSk (Gulf
                 CALLS Study) aims to assess the long-term association between
@@ -73,7 +73,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .intro {
   height: auto;
   min-height: 108vh;

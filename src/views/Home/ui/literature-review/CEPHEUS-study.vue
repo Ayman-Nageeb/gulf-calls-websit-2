@@ -2,12 +2,12 @@
   <div >
     <v-row>
       <v-col cols="12" lg="6" sm="12"  v-animate-onscroll="{down: 'animate__animated animate__fadeInLeftBig'}">
-        <h1 class="display-1 font-weight-bold mt-4" style="color: #fe7504">
+        <h1 class="display-1 font-weight-bold mt-4 text-justify" style="color: #fe7504">
           Arabian Gulf CEPHEUS Study
         </h1>
       </v-col>
       <v-col  v-animate-onscroll="{down: 'animate__animated animate__fadeInRightBig'}">
-        <v-card outlined class="pa-6 title">
+        <v-card outlined class="pa-6 title text-justify">
           <p>
             In the Arabian Gulf region, the only study that demonstrated care
             gaps in the management of patients with high TG levels and high risk
@@ -29,7 +29,7 @@
       </v-col>
     </v-row>
     <v-row v-if="showMore">
-      <v-col class="title">
+      <v-col class="title text-justify">
         <p>
           The CEPHEUS was a multi-center non-interventional survey in 6 Arabian
           Gulf countries (Bahrain, Oman, Qatar, the United Arab Emirates [UAE],

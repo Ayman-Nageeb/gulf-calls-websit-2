@@ -2,7 +2,7 @@
   <div>
     <v-row transition="slide-y-transition">
       <v-col>
-        <v-card outlined class="pa-6 title" v-animate-onscroll="{down: 'animate__animated animate__slideInLeft'}">
+        <v-card outlined class="pa-6 title text-justify" v-animate-onscroll="{down: 'animate__animated animate__slideInLeft'}">
           <p>
             There are few surveys assessed the physicians’ perception, knowledge
             and practice toward the management of lipid parameters in various
@@ -26,7 +26,7 @@
       </v-col>
       <v-col cols="12" lg="6" sm="12">
         <h1
-          class="display-1 font-weight-bold text-right mt-4"
+          class="display-1 font-weight-bold text-right mt-4 text-justify"
           style="color: #fe7504"
           v-animate-onscroll="{down: 'animate__animated animate__slideInRight'}"
         >

@@ -7,7 +7,7 @@
       </h1>
       <v-card
         outlined
-        class="pa-6 title mt-8"
+        class="pa-9 title mt-8 text-justify"
         v-animate-onscroll="{ down: 'animate__animated animate__zoomIn' }"
       >
         Several studies have demonstrated a strong association between high

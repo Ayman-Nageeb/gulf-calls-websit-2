@@ -1,7 +1,8 @@
 <template>
   <v-app>
     <v-app-bar
-      fixed
+      :fixed="bg.toLowerCase() == 'transparent'"
+      :app="bg.toLowerCase() !== 'transparent'"
       :color="bg"
       class="px-4 elevation-0"
       :style="
@@ -38,7 +39,6 @@
         >
       </div>
     </v-app-bar>
-
     <v-main>
       <router-view />
     </v-main>

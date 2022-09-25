@@ -9,7 +9,7 @@
         />
         Endpoints
       </h1>
-      <v-row>
+      <v-row class="text-justify">
         <v-col>
           <v-card
             outlined
