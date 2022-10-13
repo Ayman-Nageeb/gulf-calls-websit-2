@@ -1,9 +1,7 @@
 <template>
   <div class="intro">
     <v-container style="height: auto; min-height: 100vh; position: relative">
-      <v-row
-        class="mt-16 pt-16"
-      >
+      <v-row class="mt-16 pt-16">
         <v-col lg="2" xl="3" md="0" sm="0">
           <div></div>
         </v-col>
@@ -31,15 +29,30 @@
                 <v-btn
                   class="mx-1"
                   route
-                  :to="{ name: 'Login' }"
+                  :to="{
+                    name:
+                      $store.getters['User/isAuthenticated'] != true
+                        ? 'Login'
+                        : 'Staff.Dashboard',
+                  }"
                   x-large
                   color="#fe7504"
                   depressed
                   dark
                 >
-                  <v-icon>mdi-lock-outline</v-icon>
+                  <v-icon>
+                    {{
+                      $store.getters["User/isAuthenticated"] != true
+                        ? "mdi-lock-outline"
+                        : "mdi-view-dashboard"
+                    }}
+                  </v-icon>
                   <span class="mx-1"></span>
-                  Staff login
+                  {{
+                    $store.getters["User/isAuthenticated"] != true
+                      ? "Staff login"
+                      : "Goto Dashboard"
+                  }}
                 </v-btn>
                 <span class="mx-6"></span>
                 <v-btn
@@ -55,8 +68,6 @@
                   <span class="mx-1"></span>
                   Contact us
                 </v-btn>
-
-                
               </div>
             </v-card-text>
           </v-card>

@@ -6,17 +6,31 @@
           <v-btn
             class="mx-1"
             route
-            :to="{ name: 'Login' }"
+            :to="{
+              name:
+                $store.getters['User/isAuthenticated'] != true
+                  ? 'Login'
+                  : 'Staff.Dashboard',
+            }"
             large
             color="#fe7504"
             depressed
             outlined
             dark
           >
-            <v-icon>mdi-lock-outline</v-icon>
+            <v-icon>
+              {{
+                $store.getters["User/isAuthenticated"] != true
+                  ? "mdi-lock-outline"
+                  : "mdi-view-dashboard"
+              }}
+            </v-icon>
             <span class="mx-1"></span>
-            Staff login
-            <span class="mx-1"></span>
+            {{
+              $store.getters["User/isAuthenticated"] != true
+                ? "Staff login"
+                : "Goto Dashboard"
+            }}
           </v-btn>
           <v-spacer></v-spacer>
           <div>

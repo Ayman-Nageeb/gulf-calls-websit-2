@@ -47,7 +47,65 @@ const routes = [
     path: "/login",
     name: "Login",
     component: () =>
-      import(/* webpackChunkName: "contact-us" */ "../views/Login/ui/Index.vue"),
+      import(
+        /* webpackChunkName: "contact-us" */ "../views/Login/ui/Index.vue"
+      ),
+  },
+  {
+    path: "/staff/dashboard",
+    name: "Staff.Dashboard",
+    component: () =>
+      import(
+        /* webpackChunkName: "contact-us" */ "../views/Staff/Dashboard/ui/Index.vue"
+      ),
+  },
+  {
+    path: "/records/create",
+    name: "Records.Create",
+    component: () =>
+      import(
+        /* webpackChunkName: "contact-us" */ "../views/Staff/AddRecord/ui/Index.vue"
+      ),
+  },
+  {
+    path: "/records/:id",
+    name: "Records.Show",
+    component: () =>
+      import(
+        /* webpackChunkName: "contact-us" */ "../views/Staff/SetRecord/ui/Index.vue"
+      ),
+  },
+  {
+    path: "/records/:id/basics/set",
+    name: "Records.Basics.Set",
+    component: () =>
+      import(
+        /* webpackChunkName: "contact-us" */ "../views/Staff/SetRecord/ui/Basics.vue"
+      ),
+  },
+  {
+    path: "/records/:id/per-index/set",
+    name: "Records.PreIndex.Set",
+    component: () =>
+      import(
+        /* webpackChunkName: "contact-us" */ "../views/Staff/SetRecord/ui/PreIndex.vue"
+      ),
+  },
+  {
+    path: "/records/:id/index-data/set",
+    name: "Records.Index.Set",
+    component: () =>
+      import(
+        /* webpackChunkName: "contact-us" */ "../views/Staff/SetRecord/ui/IndexData.vue"
+      ),
+  },
+  {
+    path: "/records/:id/post-index/set",
+    name: "Records.PostIndex.Set",
+    component: () =>
+      import(
+        /* webpackChunkName: "contact-us" */ "../views/Staff/SetRecord/ui/PostIndex.vue"
+      ),
   },
 ];
 

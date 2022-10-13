@@ -39,12 +39,12 @@
           <v-card-text class="pb-0">
             <v-text-field
               type="email"
-              placeholder="Enter your email"
+              placeholder="Enter your user name"
               label="Email"
               prepend-inner-icon="mdi-account"
               outlined
-              v-model="userName"
-              :error-messages="userNameErrors"
+              v-model="email"
+              :error-messages="emailErrors"
             >
             </v-text-field>
             <v-text-field
@@ -95,20 +95,20 @@
   </v-container>
 </template>
   
-  <style scoped>
+<style scoped>
 .radius-12 {
   border-radius: 20px !important;
 }
 </style>
   
   
-  <script>
+<script>
 export default {
   data: () => ({
     showPassword: false,
-    userName: "",
+    email: "",
     password: "",
-    userNameErrors: [],
+    emailErrors: [],
     passwordErrors: [],
     loading: false,
     responseAlert: {
@@ -119,21 +119,59 @@ export default {
     },
   }),
   created() {
-    this.responseAlert.border = "right";
+    if (this.$store.getters["User/isAuthenticated"]) {
+      this.$router.push({ name: "Staff.Dashboard" });
+    }
+  },
+  computed: {
+    validUsers() {
+      const omanFirstCenterUser = {
+        email: "first_center@oman.com",
+        name: 'Oman first center user',
+        password: "123456",
+        center: {
+          name: "First Center Oman",
+          number: 1,
+          country: "Oman",
+          country_code: "ON",
+          last_patient_number: 21,
+        },
+      };
+      const qatarFirstCenterUser = {
+        email: "first_center@qatar.com",
+        name: 'Qatar first center user',
+        password: "123456",
+        center: {
+          name: "First Center Qatar",
+          number: 1,
+          country: "Qatar",
+          country_code: "QR",
+          last_patient_number: 0,
+        },
+      };
+      const validUsers = [omanFirstCenterUser, qatarFirstCenterUser];
+      return validUsers;
+    },
   },
   methods: {
     login() {
       //remove all errors
-      this.userNameErrors = [];
+      this.emailErrors = [];
       this.passwordErrors = [];
+      this.responseAlert = {
+        show: false,
+        messages: [],
+        type: "warning",
+        border: "left",
+      };
       //set request data
-      const userName = this.userName.trim().toLowerCase();
+      const email = this.email.trim().toLowerCase();
       const password = this.password;
       //hide response alert
       this.responseAlert.show = false;
       // try to login
-      if (userName == "") {
-        this.userNameErrors.push("Please Enter your email");
+      if (email == "") {
+        this.emailErrors.push("Please Enter your email");
         return;
       }
       if (password.trim() == "") {
@@ -141,19 +179,19 @@ export default {
         return;
       }
 
-      let users = this.$store.getters["Users/users"];
-      for (let user of users) {
-        if (userName == user.user_name.trim().toLowerCase()) {
-          if (password == user.password) {
-            this.$store.commit("Users/setAuthentication", user);
-            this.$router.push({ name: "Home" });
-            return true;
+      for (let user of this.validUsers) {
+        if (user.email.trim().toLocaleLowerCase() == email) {
+          if (user.password == password) {
+            this.$store.dispatch("User/login", { user: user, token: password });
+            this.$router.push({ name: "Staff.Dashboard" });
+            return;
           }
         }
       }
-      this.responseAlert.messages.push("Error: wrong user name or password");
-      this.responseAlert.type = "error";
+
       this.responseAlert.show = true;
+      this.responseAlert.type = "error";
+      this.responseAlert.messages.push("Wrong user name or password");
     },
   },
 };
