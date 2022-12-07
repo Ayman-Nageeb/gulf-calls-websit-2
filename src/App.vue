@@ -51,6 +51,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import Footer from "./components/Footer.vue";
 export default {
   name: "App",
@@ -76,6 +77,12 @@ export default {
     window.onscroll = () => {
       this.changeColor();
     };
+    if (this.$store.getters["User/isAuthenticated"]) {
+      const user = this.$store.getters["User/user"];
+      axios.defaults.headers.common["authorization-token"] = user.token;
+    } else {
+      axios.defaults.headers.common["authorization-token"] = "unauthorized";
+    }
   },
   methods: {
     changeColor() {

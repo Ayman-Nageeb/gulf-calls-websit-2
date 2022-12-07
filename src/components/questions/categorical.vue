@@ -1,0 +1,110 @@
+<template>
+  <div>
+    <v-card
+      class="py-4 my-4"
+      :style="{ border: `${errors.length > 0 ? '2px solid red' : 'none'}` }"
+    >
+      <v-card-title>
+        {{ question.text }}
+      </v-card-title>
+      <v-card-text>
+        <p>{{ question.placeholder }}</p>
+        <v-radio-group v-model="value">
+          <v-card
+            :dark="value == q"
+            outlined
+            class="ma-2 pa-4"
+            v-for="(q, index) of question.validValues"
+            :key="index"
+            @click="
+              value = q;
+              updateValue();
+            "
+            :color="value == q ? `success` : ``"
+            :class="{
+              'white--text': value == q,
+            }"
+          >
+            <span class="title">
+              <v-radio :label="`${q}`" :value="q"></v-radio>
+            </span>
+          </v-card>
+        </v-radio-group>
+      </v-card-text>
+    </v-card>
+  </div>
+</template>
+  
+  <script>
+export default {
+  props: {
+    question: {
+      required: true,
+      type: Object,
+      default: () => ({
+        text: "",
+        placeholder: "Enter value here",
+        type: "categorical",
+        isRequired: true,
+        validValues: [],
+        value: null,
+      }),
+    },
+  },
+  data: () => ({
+    errors: [],
+    value: null,
+  }),
+  created() {
+    this.value = this.questionValue;
+  },
+  computed: {
+    record() {
+      return this.$store.getters["Records/selectedRecord"];
+    },
+    questionValue() {
+      return this.$store.getters["Records/selectedRecord"][this.question.id()];
+    },
+    validateAll() {
+      return this.$store.getters["Records/validateAll"];
+    },
+  },
+  methods: {
+    updateValue() {
+      if (this.validate()) {
+        this.$store.commit("Records/setAttribute", {
+          id: this.question.id(),
+          value: this.value,
+        });
+      }
+    },
+    validate() {
+      this.errors = [];
+      const val = this.value;
+      if (!val || !this.question.validValues.includes(val)) {
+        this.errors.push(["The Given Value is invalid"]);
+        this.errors.push([`Please select a value`]);
+        return false;
+      }
+      this.$store.commit("Records/setAttribute", {
+        id: this.question.id(),
+        value: this.values,
+      });
+      this.$emit("input", this.value);
+      return true;
+    },
+  },
+  watch: {
+    validateAll() {
+      if (this.validateAll) {
+        this.validate();
+      } else {
+        this.errors = [];
+      }
+    },
+  },
+};
+</script>
+  
+  <style>
+</style>

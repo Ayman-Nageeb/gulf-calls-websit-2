@@ -103,6 +103,9 @@
   
   
 <script>
+import validUsers from "./centersUsers";
+import axios from "axios";
+
 export default {
   data: () => ({
     showPassword: false,
@@ -123,36 +126,7 @@ export default {
       this.$router.push({ name: "Staff.Dashboard" });
     }
   },
-  computed: {
-    validUsers() {
-      const omanFirstCenterUser = {
-        email: "first_center@oman.com",
-        name: 'Oman first center user',
-        password: "123456",
-        center: {
-          name: "First Center Oman",
-          number: 1,
-          country: "Oman",
-          country_code: "ON",
-          last_patient_number: 21,
-        },
-      };
-      const qatarFirstCenterUser = {
-        email: "first_center@qatar.com",
-        name: 'Qatar first center user',
-        password: "123456",
-        center: {
-          name: "First Center Qatar",
-          number: 1,
-          country: "Qatar",
-          country_code: "QR",
-          last_patient_number: 0,
-        },
-      };
-      const validUsers = [omanFirstCenterUser, qatarFirstCenterUser];
-      return validUsers;
-    },
-  },
+  computed: {},
   methods: {
     login() {
       //remove all errors
@@ -179,11 +153,18 @@ export default {
         return;
       }
 
-      for (let user of this.validUsers) {
+      for (let user of validUsers) {
         if (user.email.trim().toLocaleLowerCase() == email) {
           if (user.password == password) {
             this.$store.dispatch("User/login", { user: user, token: password });
-            this.$router.push({ name: "Staff.Dashboard" });
+            axios.defaults.headers.common["authorization-token"] =  user.token;
+            let next = { name: "Staff.Dashboard" };
+
+            if (user.isAdmin) {
+              next = { name: "Staff.Admin.Patients" };
+            }
+
+            this.$router.push(next);
             return;
           }
         }

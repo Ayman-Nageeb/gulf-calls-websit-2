@@ -35,9 +35,9 @@
               down: 'animate__animated animate__fadeInRightBig',
             }"
           >
-            <di>
+            <div>
               <v-img :src="center.image" contain />
-            </di>
+            </div>
           </v-col>
         </v-row>
         <v-divider class="mt-6 mb-3"></v-divider>

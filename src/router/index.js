@@ -52,6 +52,14 @@ const routes = [
       ),
   },
   {
+    path: "/staff/admin/patients",
+    name: "Staff.Admin.Patients",
+    component: () =>
+      import(
+        /* webpackChunkName: "contact-us" */ "../views/Staff/Admin/Patients/ui/Index.vue"
+      ),
+  },
+  {
     path: "/staff/dashboard",
     name: "Staff.Dashboard",
     component: () =>
@@ -67,9 +75,18 @@ const routes = [
         /* webpackChunkName: "contact-us" */ "../views/Staff/AddRecord/ui/Index.vue"
       ),
   },
+  
   {
     path: "/records/:id",
     name: "Records.Show",
+    component: () =>
+      import(
+        /* webpackChunkName: "contact-us" */ "../views/Staff/SetRecord/ui/Index.vue"
+      ),
+  },
+  {
+    path: "/records/:id/set-data/:pageId",
+    name: "Records.SetData",
     component: () =>
       import(
         /* webpackChunkName: "contact-us" */ "../views/Staff/SetRecord/ui/Index.vue"
@@ -80,7 +97,7 @@ const routes = [
     name: "Records.Basics.Set",
     component: () =>
       import(
-        /* webpackChunkName: "contact-us" */ "../views/Staff/SetRecord/ui/Basics.vue"
+        /* webpackChunkName: "contact-us" */ "../views/Staff/SetRecord/ui/Basics/Index.vue"
       ),
   },
   {

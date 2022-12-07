@@ -8,7 +8,7 @@
       :overlay="false"
       transition="dialog-transition"
     >
-      <v-card>
+      <v-card :loading="loading" :disabled="loading" loader-height="15">
         <v-card-title>
           <v-btn icon large color="secondary" @click="goBack">
             <v-icon>mdi-arrow-left</v-icon>
@@ -33,25 +33,18 @@
           <v-container style="max-width: 1080px">
             <p class="title mb-6">Patient Basic Data</p>
             <div class="my-3"></div>
-            <QuestionView :question="questions[selectedQuestionIndex]" />
+            <div v-for="(q, i) of questions" :key="i">
+              <question-view :question="q" />
+            </div>
           </v-container>
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
           <v-container style="max-width: 1080px">
             <v-card-actions class="pa-0 ma-0">
-              <v-btn
-                color="secondary"
-                width="140px"
-                text
-                x-large
-                @click="pervious"
-              >
-                <v-icon>mdi-arrow-left</v-icon>
-                <span class="mx-2"></span>
-                <span>pervious</span>
-              </v-btn>
               <v-spacer></v-spacer>
+              
+              <span class="mx-2"></span>
               <v-btn
                 color="success"
                 width="200px"
@@ -63,6 +56,7 @@
                 <span class="mx-2"></span>
                 <v-icon>mdi-arrow-right</v-icon>
               </v-btn>
+              <v-spacer></v-spacer>
             </v-card-actions>
           </v-container>
         </v-card-actions>
@@ -73,11 +67,22 @@
 
 <script>
 import QuestionView from "@/components/QuestionView.vue";
+import axios from "axios";
+import { validateQuestions } from "../../SetRecord/ui/validateQuestion";
+import P1 from '../../SetRecord/survey_pages/P1';
 export default {
-  data: () => ({
-    showDialog: true,
-    selectedQuestionIndex: 0,
-  }),
+  components: { QuestionView },
+  data() {
+    return {
+      showDialog: true,
+      loading: false,
+    };
+  },
+  created() {
+    this.$store.commit("Records/reSetSelectedRecord");
+    this.$store.commit("Records/invalidateAll");
+    this.questions = P1.questions;
+  },
   computed: {
     user() {
       return this.$store.getters["User/user"];
@@ -85,306 +90,49 @@ export default {
     center() {
       return this.user.center;
     },
-    questions() {
-      return [
-        {
-          text: "Age",
-          type: "numeric",
-          range: { from: 44, to: 100 },
-          step: 1,
-          unit: "Years",
-        },
-        {
-          text: "Gender",
-          type: "categorical",
-          values: ["Female", "Male"],
-        },
-        {
-          text: "Education",
-          type: "categorical",
-          values: [
-            "Less than a high school diploma",
-            "High school diploma",
-            "Bachelor’s degree",
-            "Master’s degree",
-            "Doctoral degree",
-          ],
-        },
-        {
-          text: "Nationality",
-          type: "categorical",
-          values: [
-            "Omani",
-            "Saudi",
-            "Qatari",
-            "Kuwaiti",
-            "Emirati",
-            "Bahraini",
-            "Yemeni",
-            "Pakistani",
-            "Indian",
-            "Bengali",
-            "Srilanki",
-            "Sudani",
-            "Syrian",
-            "Iraqi",
-            "Egyption",
-            "Palestine",
-            "Afghanistan",
-            "Åland Islands",
-            "Albania",
-            "Algeria",
-            "American Samoa",
-            "AndorrA",
-            "Angola",
-            "Anguilla",
-            "Antarctica",
-            "Antigua and Barbuda",
-            "Argentina",
-            "Armenia",
-            "Aruba",
-            "Australia",
-            "Austria",
-            "Azerbaijan",
-            "Bahamas",
-            "Bangladesh",
-            "Barbados",
-            "Belarus",
-            "Belgium",
-            "Belize",
-            "Benin",
-            "Bermuda",
-            "Bhutan",
-            "Bolivia",
-            "Bosnia and Herzegovina",
-            "Botswana",
-            "Bouvet Island",
-            "Brazil",
-            "British Indian Ocean Territory",
-            "Brunei Darussalam",
-            "Bulgaria",
-            "Burkina Faso",
-            "Burundi",
-            "Cambodia",
-            "Cameroon",
-            "Canada",
-            "Cape Verde",
-            "Cayman Islands",
-            "Central African Republic",
-            "Chad",
-            "Chile",
-            "China",
-            "Christmas Island",
-            "Cocos (Keeling) Islands",
-            "Colombia",
-            "Comoros",
-            "Congo",
-            "Congo, The Democratic Republic of the",
-            "Cook Islands",
-            "Costa Rica",
-            "Cote D'Ivoire",
-            "Croatia",
-            "Cuba",
-            "Cyprus",
-            "Czech Republic",
-            "Denmark",
-            "Djibouti",
-            "Dominica",
-            "Dominican Republic",
-            "Ecuador",
-            "El Salvador",
-            "Equatorial Guinea",
-            "Eritrea",
-            "Estonia",
-            "Ethiopia",
-            "Falkland Islands (Malvinas)",
-            "Faroe Islands",
-            "Fiji",
-            "Finland",
-            "France",
-            "French Guiana",
-            "French Polynesia",
-            "French Southern Territories",
-            "Gabon",
-            "Gambia",
-            "Georgia",
-            "Germany",
-            "Ghana",
-            "Gibraltar",
-            "Greece",
-            "Greenland",
-            "Grenada",
-            "Guadeloupe",
-            "Guam",
-            "Guatemala",
-            "Guernsey",
-            "Guinea",
-            "Guinea-Bissau",
-            "Guyana",
-            "Haiti",
-            "Heard Island and Mcdonald Islands",
-            "Holy See (Vatican City State)",
-            "Honduras",
-            "Hong Kong",
-            "Hungary",
-            "Iceland",
-            "Indonesia",
-            "Iran, Islamic Republic Of",
-            "Ireland",
-            "Isle of Man",
-            "Italy",
-            "Jamaica",
-            "Japan",
-            "Jersey",
-            "Jordan",
-            "Kazakhstan",
-            "Kenya",
-            "Kiribati",
-            "Korea, Democratic People'S Republic of",
-            "Korea, Republic of",
-            "Kyrgyzstan",
-            "Lao People'S Democratic Republic",
-            "Latvia",
-            "Lebanon",
-            "Lesotho",
-            "Liberia",
-            "Libyan Arab Jamahiriya",
-            "Liechtenstein",
-            "Lithuania",
-            "Luxembourg",
-            "Macao",
-            "Macedonia, The Former Yugoslav Republic of",
-            "Madagascar",
-            "Malawi",
-            "Malaysia",
-            "Maldives",
-            "Mali",
-            "Malta",
-            "Marshall Islands",
-            "Martinique",
-            "Mauritania",
-            "Mauritius",
-            "Mayotte",
-            "Mexico",
-            "Micronesia, Federated States of",
-            "Moldova, Republic of",
-            "Monaco",
-            "Mongolia",
-            "Montserrat",
-            "Morocco",
-            "Mozambique",
-            "Myanmar",
-            "Namibia",
-            "Nauru",
-            "Nepal",
-            "Netherlands",
-            "Netherlands Antilles",
-            "New Caledonia",
-            "New Zealand",
-            "Nicaragua",
-            "Niger",
-            "Nigeria",
-            "Niue",
-            "Norfolk Island",
-            "Northern Mariana Islands",
-            "Norway",
-            "Palau",
-            "Panama",
-            "Papua New Guinea",
-            "Paraguay",
-            "Peru",
-            "Philippines",
-            "Pitcairn",
-            "Poland",
-            "Portugal",
-            "Puerto Rico",
-            "Reunion",
-            "Romania",
-            "Russian Federation",
-            "RWANDA",
-            "Saint Helena",
-            "Saint Kitts and Nevis",
-            "Saint Lucia",
-            "Saint Pierre and Miquelon",
-            "Saint Vincent and the Grenadines",
-            "Samoa",
-            "San Marino",
-            "Sao Tome and Principe",
-            "Senegal",
-            "Serbia and Montenegro",
-            "Seychelles",
-            "Sierra Leone",
-            "Singapore",
-            "Slovakia",
-            "Slovenia",
-            "Solomon Islands",
-            "Somalia",
-            "South Africa",
-            "South Georgia and the South Sandwich Islands",
-            "Spain",
-            "Suriname",
-            "Svalbard and Jan Mayen",
-            "Swaziland",
-            "Sweden",
-            "Switzerland",
-            "Taiwan, Province of China",
-            "Tajikistan",
-            "Tanzania, United Republic of",
-            "Thailand",
-            "Timor-Leste",
-            "Togo",
-            "Tokelau",
-            "Tonga",
-            "Trinidad and Tobago",
-            "Tunisia",
-            "Turkey",
-            "Turkmenistan",
-            "Turks and Caicos Islands",
-            "Tuvalu",
-            "Uganda",
-            "Ukraine",
-            "United Kingdom",
-            "United States",
-            "United States Minor Outlying Islands",
-            "Uruguay",
-            "Uzbekistan",
-            "Vanuatu",
-            "Venezuela",
-            "Viet Nam",
-            "Virgin Islands, British",
-            "Virgin Islands, U.S.",
-            "Wallis and Futuna",
-            "Western Sahara",
-            "Zambia",
-            "Zimbabwe",
-          ],
-        },
-        {
-          text: "pre_index Unit used for measuring",
-          type: "categorical",
-          values: ["mmol/L", "mg/dL"],
-        },
-      ];
-    },
   },
   methods: {
-    next() {
-      if (this.selectedQuestionIndex < this.questions.length - 1) {
-        ++this.selectedQuestionIndex;
-      } else {
-        this.$router.push({ name: "Records.Show", params: { id: "OM10022" } });
+    async next() {
+      this.$store.commit("Records/invalidateAll");
+
+      if (!validateQuestions(this.questions)) {
+        this.$store.commit("Records/validateAll");
+        return;
       }
-    },
-    pervious() {
-      if (this.selectedQuestionIndex > 0) {
-        --this.selectedQuestionIndex;
+      this.loading = true;
+
+      try {
+        const data = this.$store.getters["Records/selectedRecord"];
+        const centerCode = "" + this.center.country_code + this.center.number;
+        const response = await axios.post(`/centers/${centerCode}/patients`, {
+          data: JSON.stringify(data),
+        });
+        console.log();
+        let patient = response.data.data;
+        patient = Object.assign(
+          {
+            id: patient.id,
+            created_at: patient.created_at,
+            updated_at: patient.updated_at,
+          },
+          JSON.parse(patient.data)
+        );
+
+        this.$store.commit("Records/setRecord", patient);
+        this.$router.replace({
+          name: "Records.SetData",
+          params: { id: patient.code, pageId: "pre-index-data" },
+        });
+      } catch (error) {
+        alert(error);
       }
+      this.loading = false;
     },
+    pervious() {},
     goBack() {
       window.history.back();
     },
   },
-  components: { QuestionView },
 };
 </script>
 

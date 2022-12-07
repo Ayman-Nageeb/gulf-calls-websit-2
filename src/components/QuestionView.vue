@@ -1,9 +1,7 @@
 <template>
   <div>
-    <p class="headline font-weight-bold">
-      {{ question.text }}
-    </p>
-    <div v-if="question.type.trim().toLocaleLowerCase() == 'categorical'">
+    
+    <!-- <div v-if="question.type.trim().toLocaleLowerCase() == 'categorical'">
       <v-card flat>
         <v-card-text x-large>
           <v-text-field
@@ -31,62 +29,46 @@
           {{ q }}
         </span>
       </v-card>
+    </div> -->
+    <div v-if="question.type.trim().toLocaleLowerCase() == 'text'">
+      <text-question :question="question" />
     </div>
+
     <div v-if="question.type.trim().toLocaleLowerCase() == 'numeric'">
-      <!-- <v-row class="mb-4" justify="space-between">
-        <v-col class="text-left">
-          <span class="text-h2 font-weight-light" v-text="selected"></span>
-          <span class="subheading font-weight-light mr-1">{{
-            question.unit
-          }}</span>
-        </v-col>
-      </v-row> -->
+      <numeric :question="question" />
+    </div>
 
-      <v-text-field
-        placeholder="Enter value here"
-        x-large
-        v-model="selected"
-        :min="question.range.from"
-        :max="question.range.to"
-        :step="question.step ? question.step : 0.01"
-        type="number"
-        outlined
-        :suffix="` ${question.unit}`"
-      ></v-text-field>
+    <div v-if="question.type.trim().toLocaleLowerCase() == 'categorical'">
+      <categorical :question="question" />
+    </div>
 
-      <!-- <v-slider
-        v-model="selected"
-        always-dirty
-        :min="question.range.from"
-        :max="question.range.to"
-        :step="question.step ? question.step : 0.01"
-        thumb-label
-        :thumb-size="48"
-      >
-        <template v-slot:prepend>
-          <v-btn icon @click="selected -= question.step ? question.step : 0.01">
-            <v-icon>mdi-minus</v-icon>
-          </v-btn>
-          <v-icon> </v-icon>
-        </template>
-
-        <template v-slot:append>
-          <v-btn icon @click="selected += question.step ? question.step : 0.01">
-            <v-icon> mdi-plus </v-icon>
-          </v-btn>
-        </template>
-      </v-slider> -->
+    <div v-if="question.type.trim().toLocaleLowerCase() == 'select'">
+      <select-question :question="question" />
     </div>
   </div>
 </template>
 
 <script>
+import Categorical from './questions/categorical.vue';
+import numeric from "./questions/numeric.vue";
+import textQuestion from "./questions/text.vue";
+import SelectQuestion from './questions/selectQuestion.vue';
+
 export default {
+  components: { numeric, Categorical, SelectQuestion, textQuestion },
   props: {
     question: {
       required: true,
       type: Object,
-      default: () => ({}),
+      default: () => ({
+        text: "",
+        placeholder: "Enter value here",
+        type: "numeric",
+        isRequired: true,
+        range: { min: 0, max: 9999999999, step: 0.01 },
+        unit: "Unit",
+        value: null,
+      }),
     },
   },
   data: () => ({

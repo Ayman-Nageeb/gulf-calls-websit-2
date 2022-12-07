@@ -2,7 +2,35 @@
   <div>
     <v-container style="max-width: 1080px">
       <v-card outlined>
-        <v-card-title> {{ center.name }} Records </v-card-title>
+        <v-card-title>
+          {{ center.name }} Records
+          <v-spacer></v-spacer>
+          <download-excel
+            class="btn btn-default"
+            :data="patients"
+            :worksheet="`${center.name} Records`"
+            :name="`${center.name}.xls`"
+          >
+            <v-btn color="success" large text>
+              <v-icon>mdi-download</v-icon>
+              <span class="mx-1"></span>
+              Download XLS
+            </v-btn>
+          </download-excel>
+          <!-- <download-excel
+            class="btn btn-default"
+            :data="patients"
+            :worksheet="`${center.name} Records`"
+            :name="`${center.name}.xls`"
+            type="csv"
+          >
+            <v-btn color="success" large text>
+              <v-icon>mdi-download</v-icon>
+              <span class="mx-1"></span>
+              Download CSV
+            </v-btn>
+          </download-excel> -->
+        </v-card-title>
         <v-card-text>
           <v-text-field
             name="records-search-bar"
@@ -13,20 +41,18 @@
             v-model="search"
           ></v-text-field>
           <v-data-table
+            :loading="loading"
             :headers="recordsDataTableHeaders"
-            :items="dataTableItems"
+            :items="patients"
             class="elevation-0"
             :search="search"
           >
             <template v-slot:[`item.code`]="{ item }">
               <v-btn
                 route
-                :to="{
-                  name: 'Records.Show',
-                  params: { id: item.code },
-                }"
                 color="#536dfe"
                 text
+                @click="goSetRecordData(item)"
               >
                 {{ item.code }}
               </v-btn>
@@ -39,9 +65,12 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data: () => ({
     search: "",
+    patients: [],
+    loading: false,
   }),
   computed: {
     user() {
@@ -56,43 +85,43 @@ export default {
         { text: "Age", value: "age" },
         { text: "Gender", value: "gender" },
         { text: "Nationality", value: "nationality" },
-        { text: "Education", value: "education" },
+        { text: "Education", value: "education", align: "right" },
       ];
       return headers;
     },
-    dataTableItems() {
-      const items = [];
-      const code = "OM1";
-      const validGenders = ["Male", "Female"];
-      const validNationalities = [
-        "Sudani",
-        "Omani",
-        "Saudi",
-        "Qatari",
-        "Kuwaiti",
-        "Iraqi",
-      ];
-      const validEducation = [
-        "Less than a high school diploma",
-        "High school diploma",
-        "Higher diploma",
-        "Bachelor’s degree",
-        "Master’s degree",
-        "Doctoral degree",
-      ];
-      for (let i = 1; i <= this.center.last_patient_number; i++) {
-        items.push({
-          code: code + i.toString().padStart(4, "0"),
-          age: this.randomNumber(15, 70),
-          gender: this.getRandomItem(validGenders),
-          nationality: this.getRandomItem(validNationalities),
-          education: this.getRandomItem(validEducation),
-        });
-      }
-      return items.reverse();
-    },
+  },
+  created() {
+    this.getPatients();
   },
   methods: {
+    goSetRecordData(record) {
+      this.$store.commit("Records/setRecord", record);
+      this.$router.replace({
+        name: "Records.SetData",
+        params: { id: record.code, pageId: "basic-data" },
+      });
+    },
+    async getPatients() {
+      this.loading = true;
+      try {
+        const centerCode = "" + this.center.country_code + this.center.number;
+        const response = await axios.get(`/centers/${centerCode}/patients`);
+        const data = response.data.data.reverse();
+        const patients = [];
+        for (let d of data) {
+          d.data = JSON.parse(d.data);
+          d = Object.assign(
+            { id: d.id, created_at: d.created_at, updated_at: d.updated_at },
+            d.data
+          );
+          patients.push(d);
+        }
+        this.patients = patients;
+      } catch (error) {
+        alert(error);
+      }
+      this.loading = false;
+    },
     randomNumber(min, max) {
       min = Math.ceil(min);
       max = Math.floor(max);

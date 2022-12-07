@@ -1,83 +1,116 @@
 <template>
   <div>
-    <v-container style="max-width: 1080px">
-      <v-card-title>
-        {{ center.name }}
-        (
-        <span class="mx-1"></span>
-        <img
-          :src="`https://countryflagsapi.com/png/${center.country}`"
-          style="width: 40px; border: 1px solid #ccc"
-        />
-        <span class="mx-2"></span>
-        <span class="headline">
-          {{ center.country }}
-        </span>
-        <span class="mx-1"></span>
-        )
-        <v-spacer></v-spacer>
-        <span style="color: #536dfe" class="ml-2">{{ $route.params.id }}</span>
-      </v-card-title>
-      <v-divider class="my-3"></v-divider>
-      <v-card-title>
-        Age: 52
-        <v-spacer></v-spacer>
-        Gender: Male
-      </v-card-title>
-      <v-divider class="my-3"></v-divider>
-      <v-card-title>
-        Nationality: Sudani
-        <v-spacer></v-spacer>
-        Education: Master’s degree
-      </v-card-title>
-      <v-divider class="my-3"></v-divider>
-      <v-card-title>
-        <v-btn
-          route
-          :to="{ name: 'Records.Basics.Set', params: { id: 'OM10022' } }"
-          dark
-          depressed
-          color="#fe7504"
-          x-large
-          >Set Basic Data</v-btn
-        >
-        <v-spacer></v-spacer>
-        <v-btn
-          route
-          :to="{ name: 'Records.PreIndex.Set', params: { id: 'OM10022' } }"
-          dark
-          depressed
-          color="#fe7504"
-          x-large
-          >Set PreIndex Data</v-btn
-        >
-        <v-spacer></v-spacer>
-        <v-btn
-          route
-          :to="{ name: 'Records.Index.Set', params: { id: 'OM10022' } }"
-          dark
-          depressed
-          color="#fe7504"
-          x-large
-          >Set Index Data</v-btn
-        >
-        <v-spacer></v-spacer>
-        <v-btn
-          route
-          :to="{ name: 'Records.PostIndex.Set', params: { id: 'OM10022' } }"
-          dark
-          depressed
-          color="#fe7504"
-          x-large
-          >Set Post-Index Data</v-btn
-        >
-      </v-card-title>
-    </v-container>
+    <v-dialog
+      v-model="showDialog"
+      scrollable
+      fullscreen
+      persistent
+      :overlay="false"
+      transition="dialog-transition"
+    >
+      <v-card :loading="loading" :disabled="loading" loader-height="15">
+        <v-card-title>
+          <v-btn icon large color="secondary" @click="goBack">
+            <v-icon>mdi-arrow-left</v-icon>
+          </v-btn>
+          <v-spacer></v-spacer>
+          Set Record Data [<span
+            style="color: #536dfe"
+            class="ml-2 mx-1 font-weight-bold"
+          >
+            {{ $route.params.id }} </span
+          >]
+          <v-spacer></v-spacer>
+          <v-btn
+            icon
+            large
+            color="error"
+            @click="$router.replace({ name: 'Staff.Dashboard' })"
+          >
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </v-card-title>
+        <v-divider></v-divider>
+        <v-card-text class="pt-5">
+          <v-container style="max-width: 1080px">
+            <p class="title mb-6">{{ selectedPage.title }} ({{questions.length}} Questions) </p>
+            <div class="my-3"></div>
+            <div v-for="(q, i) of questions" :key="i">
+              <question-view :question="q" />
+            </div>
+          </v-container>
+        </v-card-text>
+        <v-divider></v-divider>
+        <v-card-actions>
+          <v-container style="max-width: 1080px">
+            <v-card-actions class="pa-0 ma-0">
+              <v-spacer></v-spacer>
+              <v-btn
+                color="secondary"
+                width="180px"
+                text
+                x-large
+                @click="pervious"
+                outlined
+                v-if="hasPrevious"
+              >
+                <v-icon>mdi-arrow-left</v-icon>
+                <span class="mx-2"></span>
+                <span>pervious</span>
+              </v-btn>
+              <span class="mx-2"></span>
+              <v-btn
+                color="success"
+                width="200px"
+                depressed
+                x-large
+                @click="next"
+                v-if="hasNext"
+              >
+                <span>Next</span>
+                <span class="mx-2"></span>
+                <v-icon>mdi-arrow-right</v-icon>
+              </v-btn>
+              <v-btn
+                v-else
+                color="success"
+                width="200px"
+                depressed
+                x-large
+                @click="next"
+              >
+                <v-icon>mdi-floppy</v-icon>
+                <span class="mx-2"></span>
+                <span>Save and exit</span>
+              </v-btn>
+              <v-spacer></v-spacer>
+            </v-card-actions>
+          </v-container>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
+  
+  <script>
+import QuestionView from "@/components/QuestionView.vue";
+import axios from "axios";
+import { pages, DEFAULT_PAGE_ID } from "../survey_pages/index";
 
-<script>
+import { validateQuestions } from "../../SetRecord/ui/validateQuestion";
 export default {
+  components: { QuestionView },
+  data() {
+    return {
+      showDialog: true,
+      loading: false,
+      selectedPage: {},
+    };
+  },
+  created() {
+    this.$store.commit("Records/invalidateAll");
+    this.selectedPage = this.getPageFromUrl();
+  },
   computed: {
     user() {
       return this.$store.getters["User/user"];
@@ -85,9 +118,98 @@ export default {
     center() {
       return this.user.center;
     },
+    questions() {
+      return this.selectedPage.questions;
+    },
+    hasPrevious() {
+      return this.selectedPage !== pages[0];
+    },
+    hasNext() {
+      return this.selectedPage !== pages[pages.length - 1];
+    },
+  },
+  methods: {
+    getPageFromUrl() {
+      let id = this.$route.params.pageId;
+      if (!id) id = DEFAULT_PAGE_ID;
+      for (let page of pages) {
+        if (page.id.toLowerCase() == id.toLowerCase()) return page;
+      }
+      return pages[0];
+    },
+    async next() {
+      this.$store.commit("Records/invalidateAll");
+
+      if (!validateQuestions(this.questions)) {
+        this.$store.commit("Records/validateAll");
+        return;
+      }
+      this.loading = true;
+
+      try {
+        const data = this.$store.getters["Records/selectedRecord"];
+        const centerCode = "" + this.center.country_code + this.center.number;
+        const patientId = data.id;
+        const response = await axios.post(
+          `/centers/${centerCode}/patients/${patientId}/`,
+          {
+            data: JSON.stringify(data),
+          },
+          {
+            params: {
+              _method: "PUT",
+            },
+          }
+        );
+        console.log();
+        let patient = response.data.data;
+        patient = Object.assign(
+          {
+            id: patient.id,
+            created_at: patient.created_at,
+            updated_at: patient.updated_at,
+          },
+          JSON.parse(patient.data)
+        );
+        this.$store.commit("Records/setRecord", patient);
+
+        if (!this.hasNext) {
+          await this.$router.push({ name: "Staff.Dashboard" });
+          this.$forceUpdate();
+          return;
+        }
+
+        //get next question id
+        let nextId = this.selectedPage.next;
+        if (nextId instanceof Function) nextId = this.selectedPage.next();
+
+        this.$router.push({
+          name: "Records.SetData",
+          params: { id: patient.code, pageId: nextId },
+        });
+      } catch (error) {
+        alert(error);
+      }
+      this.loading = false;
+    },
+    pervious() {
+      window.history.back();
+    },
+    goBack() {
+      window.history.back();
+    },
+  },
+  watch: {
+    "$route.params.pageId": {
+      handler: function () {
+        this.selectedPage = this.getPageFromUrl();
+        window.location.reload();
+      },
+      deep: true,
+    },
   },
 };
 </script>
-
-<style>
+  
+  <style>
 </style>
