@@ -72,8 +72,9 @@ import P9 from "./P9";
 
 export const DEFAULT_PAGE_ID = "basic-data";
 
-export const pages = [
-  P1,
+export const basicsPages = [P1];
+
+export const preIndexPages = [
   P2,
   P3,
   P4,
@@ -94,6 +95,9 @@ export const pages = [
   P19,
   P20,
   P21,
+];
+
+export const indexPages = [
   P22,
   P22_has_coronary_vessel_disease,
   P22_data,
@@ -116,6 +120,9 @@ export const pages = [
   P39,
   P40,
   P41,
+];
+
+export const postIndexPages = [
   P42,
   P43,
   P44,
@@ -145,4 +152,6 @@ export const pages = [
   P68,
   P69,
 ];
+
+export const pages = [];
 export default pages;

@@ -147,7 +147,7 @@ export default {
     goSetRecordData(record) {
       this.$store.commit("Records/setRecord", record);
       this.$router.replace({
-        name: "Records.SetData",
+        name: "Records.Show",
         params: { id: record.code, pageId: "basic-data" },
       });
     },

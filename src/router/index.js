@@ -75,13 +75,13 @@ const routes = [
         /* webpackChunkName: "contact-us" */ "../views/Staff/AddRecord/ui/Index.vue"
       ),
   },
-  
+
   {
     path: "/records/:id",
     name: "Records.Show",
     component: () =>
       import(
-        /* webpackChunkName: "contact-us" */ "../views/Staff/SetRecord/ui/Index.vue"
+        /* webpackChunkName: "contact-us" */ "../views/Staff/SetRecord/ui/Show.vue"
       ),
   },
   {
@@ -93,15 +93,15 @@ const routes = [
       ),
   },
   {
-    path: "/records/:id/basics/set",
+    path: "/records/:id/basics/set/:pageId",
     name: "Records.Basics.Set",
     component: () =>
       import(
-        /* webpackChunkName: "contact-us" */ "../views/Staff/SetRecord/ui/Basics/Index.vue"
+        /* webpackChunkName: "contact-us" */ "../views/Staff/SetRecord/ui/Basics.vue"
       ),
   },
   {
-    path: "/records/:id/per-index/set",
+    path: "/records/:id/per-index/set/:pageId",
     name: "Records.PreIndex.Set",
     component: () =>
       import(
@@ -109,7 +109,7 @@ const routes = [
       ),
   },
   {
-    path: "/records/:id/index-data/set",
+    path: "/records/:id/index-data/set/:pageId",
     name: "Records.Index.Set",
     component: () =>
       import(
@@ -117,7 +117,7 @@ const routes = [
       ),
   },
   {
-    path: "/records/:id/post-index/set",
+    path: "/records/:id/post-index/set/:pageId",
     name: "Records.PostIndex.Set",
     component: () =>
       import(
@@ -127,7 +127,7 @@ const routes = [
 ];
 
 const router = new VueRouter({
-  mode: "history",
+  mode: "hash",
   base: process.env.BASE_URL,
   routes,
   scrollBehavior(to, form, savedPosition) {

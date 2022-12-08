@@ -1,0 +1,48 @@
+email: "squh_center@oman.com"
+password: "squh@oman123"
+name: "SQUH Center Oman user"
+
+======================
+
+email: "rh_center@oman.com"
+name: "Oman RH center user "
+password: "rh@oman123"
+
+=======================
+
+email: "abu_dhabi_center@uae.com"
+name: "UAE Abu dhabi center user"
+password: "abu_dhabi@uae123"
+
+=======================
+
+email: "dubai_center@uae.com"
+name: "UAE Dubai center user "
+password: "dubai@uae123"
+
+========================
+
+email: "center@kuwait.com"
+name: "Kuwait center user"
+password: "center@kuwait123"
+
+========================
+
+email: "center@qatar.com"
+name: "Qatar center user"
+password: "center@qatar123"
+
+========================
+
+email: "center@bahrain.com"
+name: "Bahrain center user"
+password: "center@bahrain123"
+
+========================
+
+email: "admin@gulf.com",
+name: "Administrator",
+password: "admin@gulf123",
+
+
+  

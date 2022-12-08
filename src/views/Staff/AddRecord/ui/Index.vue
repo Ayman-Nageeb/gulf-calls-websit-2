@@ -43,7 +43,7 @@
           <v-container style="max-width: 1080px">
             <v-card-actions class="pa-0 ma-0">
               <v-spacer></v-spacer>
-              
+
               <span class="mx-2"></span>
               <v-btn
                 color="success"
@@ -69,7 +69,7 @@
 import QuestionView from "@/components/QuestionView.vue";
 import axios from "axios";
 import { validateQuestions } from "../../SetRecord/ui/validateQuestion";
-import P1 from '../../SetRecord/survey_pages/P1';
+import P1 from "../../SetRecord/survey_pages/P1";
 export default {
   components: { QuestionView },
   data() {
@@ -120,8 +120,8 @@ export default {
 
         this.$store.commit("Records/setRecord", patient);
         this.$router.replace({
-          name: "Records.SetData",
-          params: { id: patient.code, pageId: "pre-index-data" },
+          name: "Records.Show",
+          params: { id: patient.code },
         });
       } catch (error) {
         alert(error);
