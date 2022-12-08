@@ -102,7 +102,7 @@ const adminAccount = {
   center: {
     name: "Administrator",
     number: 0,
-    country: "",
+    country: "Oman",
     country_code: "",
   },
   token:

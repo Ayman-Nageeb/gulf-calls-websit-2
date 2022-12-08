@@ -22,7 +22,7 @@
       </v-card-title>
       <v-card outlined class="pa-4">
         <v-card-title>
-          {{ center.name }}
+          <!-- {{ center.name }}
           (
           <span class="mx-1"></span>
           <img
@@ -34,7 +34,8 @@
             {{ center.country }}
           </span>
           <span class="mx-1"></span>
-          )
+          ) -->
+          Patient Record
           <v-spacer></v-spacer>
           <span style="color: #536dfe" class="ml-2">{{
             $route.params.id
