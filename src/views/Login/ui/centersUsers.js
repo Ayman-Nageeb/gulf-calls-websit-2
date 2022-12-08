@@ -99,6 +99,12 @@ const adminAccount = {
   name: "Administrator",
   password: "admin@gulf123",
   isAdmin: true,
+  center: {
+    name: "Administrator",
+    number: 0,
+    country: "",
+    country_code: "",
+  },
   token:
     "c9PNuT4?4dBhH=8Ws=o9vd=9Fggagkib0dgDtdUpGsejD5zC8?hMq?zfOAHS/ooBEdpX5qm!eotL?gEb1FhkGWc8KNuf6?G8uJo1M2EIWJdp1EL!CLMDRJbcpNYsptj4EYx4vP0D8bi?XoGp0t2QHg/ZB=/DMybNgAxPIzR!WDVYjbRKQJgqeZ53FBIttqiT=A!lkoQZXktl/NitvF?806jLHHjyisoh-6!WncxIpZay6=fg5SNNwpqPLTaVIJ3n",
 };
