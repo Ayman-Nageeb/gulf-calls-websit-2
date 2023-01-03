@@ -1,4 +1,5 @@
 import state from "./state";
+import store from "@/store";
 
 export default {
   setAttribute(state, attribute) {
@@ -8,11 +9,13 @@ export default {
     state.selectedRecord = record;
   },
   reSetSelectedRecord(state) {
+    const center = store.getters["User/user"].center;
     state.selectedRecord = {
       age: null,
       gender: null,
       nationality: null,
       education: null,
+      code: center.country_code + center.number + "0000",
     };
   },
   validateAll(state) {

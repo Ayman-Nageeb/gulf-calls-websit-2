@@ -92,7 +92,7 @@ export default {
   created() {
     this.validValues = this.question.validValues;
 
-    this.value = this.questionValue;
+    this.value = this.questionValue || [];
   },
   computed: {
     record() {

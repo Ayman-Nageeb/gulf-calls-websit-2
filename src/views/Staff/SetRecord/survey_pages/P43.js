@@ -1,4 +1,4 @@
-import { createMultiSelectQuestion, createTextQuestion } from "./functions";
+import { createDateQuestion, createMultiSelectQuestion } from "./functions";
 
 export default {
   id: "post-index-page-43",
@@ -15,7 +15,7 @@ export default {
         "Coronary artery bypass grafting",
       ],
     }),
-    createTextQuestion({
+    createDateQuestion({
       text: "postindex First Event date (day/month/year)",
       placeholder: "day/month/year",
     }),

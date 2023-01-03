@@ -43,7 +43,7 @@
         </v-card-title>
         <v-divider class="my-3"></v-divider>
         <v-card-title>
-          Age: {{ patient.age }}
+          Date of birth: {{ patient.date_of_birth }}
           <v-spacer></v-spacer>
           Gender: {{ patient.gender }}
         </v-card-title>
@@ -81,31 +81,101 @@
             >Set PreIndex Data</v-btn
           >
           <v-spacer></v-spacer> -->
-          <v-btn
-            route
-            :to="{
-              name: 'Records.Index.Set',
-              params: { id: patient.code, pageId: 'index-page-22' },
-            }"
-            dark
-            depressed
-            color="#fe7504"
-            x-large
-            >Set Index Data</v-btn
+          <v-menu
+            rounded=""
+            bottom
+            origin="center center"
+            transition="slide-y-transition"
           >
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                route
+                v-bind="attrs"
+                v-on="on"
+                dark
+                depressed
+                color="#fe7504"
+                x-large
+              >
+                Set Index Data
+              </v-btn>
+            </template>
+            <v-list color="#fe7504" dark>
+              <v-list-item
+                :to="{
+                  name: 'Records.Index.Clinical.Set',
+                  params: { id: patient.code, pageId: 'index-page-22' },
+                }"
+              >
+                <v-list-item-title>Clinical</v-list-item-title>
+              </v-list-item>
+              <v-list-item
+                :to="{
+                  name: 'Records.Index.Lab.Set',
+                  params: { id: patient.code, pageId: 'mmol_l-index-data-page-23' },
+                }"
+              >
+                <v-list-item-title> Lab </v-list-item-title>
+              </v-list-item>
+              <v-list-item
+                :to="{
+                  name: 'Records.Index.Treatment.Set',
+                  params: { id: patient.code, pageId: 'index-page-26' },
+                }"
+              >
+                <v-list-item-title> Treatment </v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+
           <v-spacer></v-spacer>
-          <v-btn
-            route
-            :to="{
-              name: 'Records.PostIndex.Set',
-              params: { id: patient.code, pageId: 'post-index-page-42' },
-            }"
-            dark
-            depressed
-            color="#fe7504"
-            x-large
-            >Set Post-Index Data</v-btn
+          <v-menu
+            rounded=""
+            bottom
+            origin="center center"
+            transition="slide-y-transition"
           >
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                route
+                v-bind="attrs"
+                v-on="on"
+                dark
+                depressed
+                color="#fe7504"
+                x-large
+              >
+              Set Post-Index Data
+              </v-btn>
+            </template>
+            <v-list color="#fe7504" dark>
+              <v-list-item
+                :to="{
+                  name: 'Records.PostIndex.Clinical.Set',
+                  params: { id: patient.code, pageId: 'post-index-page-42' },
+                }"
+              >
+                <v-list-item-title>Clinical</v-list-item-title>
+              </v-list-item>
+              <v-list-item
+                :to="{
+                  name: 'Records.PostIndex.Lab.Set',
+                  params: { id: patient.code, pageId: 'mmol_l-post_index-data-page-46' },
+                }"
+              >
+                <v-list-item-title> Lab </v-list-item-title>
+              </v-list-item>
+              <v-list-item
+                :to="{
+                  name: 'Records.PostIndex.Treatment.Set',
+                  params: { id: patient.code, pageId: 'post-index-page-49' },
+                }"
+              >
+                <v-list-item-title> Treatment </v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+          
         </v-card-title>
       </v-card>
     </v-container>

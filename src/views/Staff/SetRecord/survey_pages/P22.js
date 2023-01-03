@@ -1,12 +1,13 @@
 import store from "@/store";
 import {
+  createDateQuestion,
   createMultiSelectQuestion,
   createSelectQuestion,
-  createTextQuestion,
+  
 } from "./functions";
 
 const coronaryVesselDiseaseQuestion = createSelectQuestion({
-  text: "index coronary vessel disease on CT angiogram or Cath Lab",
+  text: "index Coronary vessel disease on CT angiogram or Cath Lab",
   validValues: ["Yes", "No", "Unknown"],
   radioView: true,
   isRequired: true,
@@ -27,7 +28,7 @@ export default {
         "Coronary artery bypass grafting",
       ],
     }),
-    createTextQuestion({
+    createDateQuestion({
       text: "index inclusion diagnosis date",
       placeholder: "day/month/year",
     }),

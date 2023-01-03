@@ -117,11 +117,59 @@ const routes = [
       ),
   },
   {
+    path: "/records/:id/index-data-clinical/set/:pageId",
+    name: "Records.Index.Clinical.Set",
+    component: () =>
+      import(
+        /* webpackChunkName: "contact-us" */ "../views/Staff/SetRecord/ui/IndexDataClinical.vue"
+      ),
+  },
+  {
+    path: "/records/:id/index-data-lab/set/:pageId",
+    name: "Records.Index.Lab.Set",
+    component: () =>
+      import(
+        /* webpackChunkName: "contact-us" */ "../views/Staff/SetRecord/ui/IndexDataLab.vue"
+      ),
+  },
+  {
+    path: "/records/:id/index-data-treatment/set/:pageId",
+    name: "Records.Index.Treatment.Set",
+    component: () =>
+      import(
+        /* webpackChunkName: "contact-us" */ "../views/Staff/SetRecord/ui/IndexDataTreatment.vue"
+      ),
+  },
+  {
     path: "/records/:id/post-index/set/:pageId",
     name: "Records.PostIndex.Set",
     component: () =>
       import(
         /* webpackChunkName: "contact-us" */ "../views/Staff/SetRecord/ui/PostIndex.vue"
+      ),
+  },
+  {
+    path: "/records/:id/post-index-clinical/set/:pageId",
+    name: "Records.PostIndex.Clinical.Set",
+    component: () =>
+      import(
+        /* webpackChunkName: "contact-us" */ "../views/Staff/SetRecord/ui/PostIndexClinical.vue"
+      ),
+  },
+  {
+    path: "/records/:id/post-index-lab/set/:pageId",
+    name: "Records.PostIndex.Lab.Set",
+    component: () =>
+      import(
+        /* webpackChunkName: "contact-us" */ "../views/Staff/SetRecord/ui/PostIndexLab.vue"
+      ),
+  },
+  {
+    path: "/records/:id/post-index-treatment/set/:pageId",
+    name: "Records.PostIndex.Treatment.Set",
+    component: () =>
+      import(
+        /* webpackChunkName: "contact-us" */ "../views/Staff/SetRecord/ui/PostIndexTreatment.vue"
       ),
   },
 ];

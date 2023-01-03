@@ -71,7 +71,7 @@
   
           this.$store.commit("Records/setAttribute", {
             id: this.question.id(),
-            value: Number(this.value),
+            value: this.value,
           });
         }
       },

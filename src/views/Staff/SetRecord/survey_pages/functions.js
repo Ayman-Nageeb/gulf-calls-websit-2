@@ -17,6 +17,25 @@ export const createTextQuestion = function (options) {
   return question;
 };
 
+export const createDateQuestion = function (options) {
+  const id =
+    options.id ||
+    function () {
+      return options.text.toLowerCase().replace(/\s+/g, "_");
+    };
+  const question = {
+    id: id,
+    text: options.text,
+    placeholder: options.placeholder || "Enter " + options.text,
+    type: "date",
+    isRequired: options.isRequired || false,
+    unit: options.unit || "",
+    value: options.value || "",
+  };
+
+  return question;
+};
+
 export const createNumericalQuestion = function (options) {
   const id =
     options.id ||

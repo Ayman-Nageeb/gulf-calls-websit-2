@@ -11,7 +11,7 @@ export default {
     }),
     createNumericalQuestion({
       text: "index Low-Density Lipoprotein-C (LDL-C) (mmol/L)",
-      range: { min: 0, max: 100, step: 0.1 },
+      range: { min: 1.8, max: 100, step: 0.1 },
       unit: "(LDL-C) (mmol/L)",
     }),
     createNumericalQuestion({
@@ -26,12 +26,12 @@ export default {
     }),
     createNumericalQuestion({
       text: "index Lipoprotein a (Lpa) (nmol/L)",
-      range: { min: 7, max: 500, step: 0.1 },
+      range: { min: 1, max: 1000, step: 0.1 },
       unit: "(Lpa) (nmol/L)",
     }),
     createNumericalQuestion({
       text: "index Creatinine (micro mol/L)",
-      range: { min: 0, max: 300, step: 0.1 },
+      range: { min: 0, max: 1000, step: 0.1 },
       unit: "(micro mol/L)",
     }),
   ],

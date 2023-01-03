@@ -1,17 +1,22 @@
 import {
   createCategoricalQuestion,
-  createNumericalQuestion,
+  createDateQuestion,
   createSelectQuestion,
+  createTextQuestion,
 } from "./functions";
 
 export default {
   id: "basic-data",
   title: "Basic Data",
   questions: [
-    createNumericalQuestion({
-      text: "Age",
-      range: { min: 46, max: 120, step: 1 },
-      unit: "Years",
+    createTextQuestion({
+      text: "Code",
+    }),
+    createDateQuestion({
+      text: "Date of Birth",
+      // range: { min: 46, max: 120, step: 1 },
+      placeholder: "dd/mm/yyyy",
+
       isRequired: true,
     }),
     createCategoricalQuestion({

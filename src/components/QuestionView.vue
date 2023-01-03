@@ -48,6 +48,10 @@
     <div v-if="question.type.trim().toLocaleLowerCase() == 'multi-select'">
       <multi-select-question :question="question" />
     </div>
+
+    <div v-if="question.type.trim().toLocaleLowerCase() == 'date'">
+      <dateQuestion :question="question" />
+    </div>
   </div>
 </template>
 
@@ -55,9 +59,9 @@
 import Categorical from "./questions/categorical.vue";
 import numeric from "./questions/numeric.vue";
 import textQuestion from "./questions/text.vue";
+import dateQuestion from "./questions/date.vue";
 import SelectQuestion from "./questions/selectQuestion.vue";
-import MultiSelectQuestion from './questions/multiSelectQuestion.vue';
-
+import MultiSelectQuestion from "./questions/multiSelectQuestion.vue";
 
 export default {
   components: {
@@ -65,7 +69,7 @@ export default {
     Categorical,
     SelectQuestion,
     textQuestion,
-    
+    dateQuestion,
     MultiSelectQuestion,
   },
   props: {
