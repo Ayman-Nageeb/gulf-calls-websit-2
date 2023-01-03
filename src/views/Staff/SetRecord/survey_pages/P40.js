@@ -3,6 +3,7 @@ import { createYesNoQuestion } from "./functions";
 
 const anticoagulantTreatmentQuestion = createYesNoQuestion({
   text: "index Anticoagulant treatment",
+  isRequired: true,
 });
 export default {
   id: "index-page-40",

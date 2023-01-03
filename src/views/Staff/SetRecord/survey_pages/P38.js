@@ -3,6 +3,7 @@ import { createYesNoQuestion } from "./functions";
 
 const heypertensionTreatmentQuestion = createYesNoQuestion({
   text: "index Hypertension treatment",
+  isRequired: true,
 });
 export default {
   id: "index-page-38",

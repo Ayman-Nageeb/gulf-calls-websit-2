@@ -68,7 +68,7 @@
             >Set Basic Data</v-btn
           >
           <v-spacer></v-spacer>
-          <v-btn
+          <!-- <v-btn
             route
             :to="{
               name: 'Records.PreIndex.Set',
@@ -80,7 +80,7 @@
             x-large
             >Set PreIndex Data</v-btn
           >
-          <v-spacer></v-spacer>
+          <v-spacer></v-spacer> -->
           <v-btn
             route
             :to="{

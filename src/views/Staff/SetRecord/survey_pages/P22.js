@@ -1,21 +1,22 @@
 import store from "@/store";
 import {
-  createCategoricalQuestion,
+  createMultiSelectQuestion,
   createSelectQuestion,
   createTextQuestion,
 } from "./functions";
 
 const coronaryVesselDiseaseQuestion = createSelectQuestion({
-  text: "index Number of coronary vessel disease on CT angiogram or Cath Lab",
+  text: "index coronary vessel disease on CT angiogram or Cath Lab",
   validValues: ["Yes", "No", "Unknown"],
   radioView: true,
+  isRequired: true,
 });
 
 export default {
   id: "index-page-22",
   title: "Index Data",
   questions: [
-    createCategoricalQuestion({
+    createMultiSelectQuestion({
       text: "index Inclusion diagnosis",
       validValues: [
         "Diabetes mellites",
@@ -27,7 +28,7 @@ export default {
       ],
     }),
     createTextQuestion({
-      text: "index First event date  date (day/month/year)",
+      text: "index inclusion diagnosis date",
       placeholder: "day/month/year",
     }),
     coronaryVesselDiseaseQuestion,

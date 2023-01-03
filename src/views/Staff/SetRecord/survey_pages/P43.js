@@ -1,13 +1,13 @@
-import { createCategoricalQuestion, createTextQuestion } from "./functions";
+import { createMultiSelectQuestion, createTextQuestion } from "./functions";
 
 export default {
   id: "post-index-page-43",
   title: "Post Index Data",
   questions: [
-    createCategoricalQuestion({
+    createMultiSelectQuestion({
       text: "postindex Evnet type",
       validValues: [
-        "Diabetes mellites",
+        "All-cause mortality",
         "Myocardial infarction",
         "Ischemic strock",
         "Peripheral artery disease",

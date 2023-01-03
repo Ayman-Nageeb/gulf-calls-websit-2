@@ -3,6 +3,7 @@ import { createNumericalQuestion, createYesNoQuestion } from "./functions";
 
 const statinTreatmentQuestion = createYesNoQuestion({
   text: "Post index Statin treatment",
+  isRequired: true,
 });
 export default {
   id: "post-index-page-48",

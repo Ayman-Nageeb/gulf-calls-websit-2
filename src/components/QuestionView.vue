@@ -1,6 +1,5 @@
 <template>
   <div>
-    
     <!-- <div v-if="question.type.trim().toLocaleLowerCase() == 'categorical'">
       <v-card flat>
         <v-card-text x-large>
@@ -45,17 +44,30 @@
     <div v-if="question.type.trim().toLocaleLowerCase() == 'select'">
       <select-question :question="question" />
     </div>
+
+    <div v-if="question.type.trim().toLocaleLowerCase() == 'multi-select'">
+      <multi-select-question :question="question" />
+    </div>
   </div>
 </template>
 
 <script>
-import Categorical from './questions/categorical.vue';
+import Categorical from "./questions/categorical.vue";
 import numeric from "./questions/numeric.vue";
 import textQuestion from "./questions/text.vue";
-import SelectQuestion from './questions/selectQuestion.vue';
+import SelectQuestion from "./questions/selectQuestion.vue";
+import MultiSelectQuestion from './questions/multiSelectQuestion.vue';
+
 
 export default {
-  components: { numeric, Categorical, SelectQuestion, textQuestion },
+  components: {
+    numeric,
+    Categorical,
+    SelectQuestion,
+    textQuestion,
+    
+    MultiSelectQuestion,
+  },
   props: {
     question: {
       required: true,

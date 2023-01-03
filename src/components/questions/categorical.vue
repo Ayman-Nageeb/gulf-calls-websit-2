@@ -5,7 +5,11 @@
       :style="{ border: `${errors.length > 0 ? '2px solid red' : 'none'}` }"
     >
       <v-card-title>
+        <v-btn x-small class="mx-2" outlined icon color="error" v-if="question.isRequired">
+          <v-icon>mdi-star</v-icon>
+        </v-btn>
         {{ question.text }}
+        <span class="caption error--text mx-2" v-if="question.isRequired">( Required )</span>
       </v-card-title>
       <v-card-text>
         <p>{{ question.placeholder }}</p>

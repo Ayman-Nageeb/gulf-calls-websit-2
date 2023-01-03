@@ -8,6 +8,7 @@ import {
 const measuringQuestion = createCategoricalQuestion({
   text: "post index Unit used for measuring",
   validValues: ["mmol/l", "mg/dl"],
+  isRequired: true,
 });
 
 export default {
@@ -42,6 +43,7 @@ export default {
     }),
     createYesNoQuestion({ text: "post_index Hypertension" }),
     createYesNoQuestion({ text: "post_index Smoking" }),
+    createYesNoQuestion({ text: "post_index Ex-Smoker" }),
     createYesNoQuestion({ text: "post_index Heart Failure (HF)" }),
     createYesNoQuestion({ text: "post_index Chronic Kidney Disease (CKD)" }),
     createYesNoQuestion({

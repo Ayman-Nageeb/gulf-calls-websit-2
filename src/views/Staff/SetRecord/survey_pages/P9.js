@@ -3,6 +3,7 @@ import { createYesNoQuestion } from "./functions";
 
 const fibrateTreatmentQuestion = createYesNoQuestion({
   text: "pre_index Fibrate treatment",
+  isRequired: true,
 });
 export default {
   id: "pre-index-page-9",

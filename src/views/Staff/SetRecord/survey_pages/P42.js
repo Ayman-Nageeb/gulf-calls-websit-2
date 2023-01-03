@@ -3,6 +3,7 @@ import { createYesNoQuestion } from "./functions";
 
 const anticoagulantTreatmentQuestion = createYesNoQuestion({
   text: "postindex Event",
+  isRequired: true,
 });
 export default {
   id: "post-index-page-42",

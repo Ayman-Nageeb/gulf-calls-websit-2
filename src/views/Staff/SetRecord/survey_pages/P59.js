@@ -3,6 +3,7 @@ import { createYesNoQuestion } from "./functions";
 
 const PCSK9TreatmentQuestion = createYesNoQuestion({
   text: "postindex PCSK9 treatment",
+  isRequired: true,
 });
 export default {
   id: "post-index-page-59",

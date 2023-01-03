@@ -8,6 +8,7 @@ import {
 const measuringQuestion = createCategoricalQuestion({
   text: "pre_index Unit used for measuring",
   validValues: ["mmol/l", "mg/dl"],
+  isRequired: true,
 });
 
 export default {

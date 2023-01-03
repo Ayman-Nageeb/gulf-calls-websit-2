@@ -14,6 +14,7 @@ const statinTreatmentTypeQuestion = createCategoricalQuestion({
     "Simvastatin",
     "Pitavastatin",
   ],
+  isRequired: true,
 });
 export default {
   id: "index-page-26",

@@ -3,6 +3,7 @@ import { createYesNoQuestion } from "./functions";
 
 const fibrateTreatmentQuestion = createYesNoQuestion({
   text: "index Fibrate treatment",
+  isRequired: true,
 });
 export default {
   id: "index-page-29",

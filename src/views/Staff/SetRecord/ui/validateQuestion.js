@@ -4,6 +4,7 @@ export const validateQuestions = function (questions) {
   for (let q of questions) {
     console.log("validating question :", q.type);
     console.log("validating question :", q.id());
+    if (!q.isRequired) return true;
     switch (q.type.toLocaleLowerCase()) {
       case "numeric":
         if (!validateNumericalQuestion(q)) return false;
@@ -15,7 +16,7 @@ export const validateQuestions = function (questions) {
         if (!validateSelectQuestion(q)) return false;
         break;
       case "text":
-        if(!validateTextQuestion(q))return false;
+        if (!validateTextQuestion(q)) return false;
         break;
       default:
         break;

@@ -3,6 +3,7 @@ import { createSelectQuestion, createYesNoQuestion } from "./functions";
 
 const diabetesMellitesTreatmentQuestion = createYesNoQuestion({
   text: "Post index Diabetes mellites treatment",
+  isRequired: true,
 });
 
 export default {
@@ -10,7 +11,7 @@ export default {
   title: "Post Index Data",
   questions: [
     createSelectQuestion({
-      text: "Post index lipid treatment",
+      text: "Post index other lipid treatment",
       validValues: ["Yes", "No"],
       radioView: true,
       hasCustom: true,

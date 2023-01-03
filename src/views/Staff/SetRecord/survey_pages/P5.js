@@ -3,6 +3,7 @@ import { createNumericalQuestion, createYesNoQuestion } from "./functions";
 
 const statinTreatmentQuestion = createYesNoQuestion({
   text: "pre_index Statin treatment",
+  isRequired: true,
 });
 export default {
   id: "pre-index-page-5",

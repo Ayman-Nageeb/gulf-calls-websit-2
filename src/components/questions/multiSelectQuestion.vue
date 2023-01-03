@@ -12,67 +12,56 @@
       }"
     >
       <v-card-title>
-        <v-btn x-small class="mx-2" outlined icon color="error" v-if="question.isRequired">
+        <v-btn
+          x-small
+          class="mx-2"
+          outlined
+          icon
+          color="error"
+          v-if="question.isRequired"
+        >
           <v-icon>mdi-star</v-icon>
         </v-btn>
         {{ question.text }}
-        <span class="caption error--text mx-2" v-if="question.isRequired">( Required )</span>
+        <span class="caption error--text mx-2" v-if="question.isRequired"
+          >( Required )</span
+        >
       </v-card-title>
       <v-card-text>
         <p>{{ question.placeholder }}</p>
-        <v-radio-group v-model="value" v-if="question.radioView">
-          <v-card
-            :dark="value == q"
-            outlined
-            class="ma-2 pa-4"
-            v-for="(q, index) of question.validValues"
-            :key="index"
-            @click="
-              value = q;
-              updateValue();
-            "
-            :color="value == q ? `success` : ``"
-            :class="{
-              'white--text': value == q,
-            }"
-          >
-            <span class="title">
-              <v-radio :label="`${q}`" :value="q"></v-radio>
-            </span>
-          </v-card>
-        </v-radio-group>
-        <v-autocomplete
-          v-else
-          v-model="value"
-          :items="question.validValues"
+
+        <v-card
+          :dark="value.includes(q)"
           outlined
-          :placeholder="question.placeholder"
-          @blur="validate"
-          :hint="errors.join(', ')"
-          :persistent-hint="errors.length > 0"
-          :error="errors.length > 0"
-          @change="updateValue"
-        ></v-autocomplete>
-        <div v-if="value == addedValueForCustomField">
-          <p>Please Enter value</p>
-          <v-text-field
-            outlined
-            @blur="validateCustomField"
-            :hint="customFieldErrors.join(', ')"
-            :persistent-hint="customFieldErrors.length > 0"
-            :error="customFieldErrors.length > 0"
-            v-model="customValue"
-            @input="updateValue"
-          ></v-text-field>
-        </div>
+          class="ma-2 pa-4"
+          v-for="(q, index) of question.validValues"
+          :key="index"
+          @click="
+            if (value.includes(q)) value.splice(value.indexOf(q), 1);
+            else value.push(q);
+            updateValue();
+          "
+          :color="value.includes(q) ? `success` : ``"
+          :class="{
+            'white--text': value == q,
+          }"
+        >
+          <span class="title">
+            <v-checkbox
+              v-model="value"
+              :label="`${q}`"
+              :value="q"
+              multiple
+              readonly
+            ></v-checkbox>
+          </span>
+        </v-card>
       </v-card-text>
     </v-card>
   </div>
 </template>
   
-  <script>
-import { addedValueForCustomField } from "@/views/Staff/SetRecord/ui/validateQuestion";
-
+<script>
 export default {
   props: {
     question: {
@@ -93,30 +82,17 @@ export default {
   data: () => ({
     errors: [],
     validValues: [],
-    value: null,
+    selected: [],
+    value: [],
     addedValueForCustomField: null,
     customValue: null,
     customFieldErrors: [],
   }),
 
   created() {
-    this.addedValueForCustomField = addedValueForCustomField;
-
     this.validValues = this.question.validValues;
-    if (this.question.hasCustom) {
-      this.validValues.push(this.addedValueForCustomField);
-    }
 
     this.value = this.questionValue;
-
-    if (
-      this.value &&
-      this.value.trim() != "" &&
-      !this.question.validValues.includes(this.value)
-    ) {
-      this.value = this.addedValueForCustomField;
-      this.customValue = this.questionValue;
-    }
   },
   computed: {
     record() {
@@ -131,14 +107,7 @@ export default {
   },
   methods: {
     updateValue() {
-      if (this.value == addedValueForCustomField) {
-        if (this.validateCustomField) {
-          this.$store.commit("Records/setAttribute", {
-            id: this.question.id(),
-            value: this.customValue,
-          });
-        }
-      } else if (this.validate()) {
+      if (this.validate()) {
         this.$store.commit("Records/setAttribute", {
           id: this.question.id(),
           value: this.value,
@@ -148,7 +117,7 @@ export default {
     validate() {
       this.errors = [];
       const val = this.value;
-      if (!val || val.trim() == "" || !this.validValues.includes(val)) {
+      if (!val || val.length < 1) {
         this.errors.push(["The Given Value is invalid"]);
         this.errors.push([`Please select a value`]);
         return false;

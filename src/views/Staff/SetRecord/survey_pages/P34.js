@@ -3,6 +3,7 @@ import { createYesNoQuestion } from "./functions";
 
 const omega3TreatmentQuestion = createYesNoQuestion({
   text: "index Omega 3 treatment",
+  isRequired: true,
 });
 export default {
   id: "index-page-34",

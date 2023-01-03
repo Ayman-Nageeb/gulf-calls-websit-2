@@ -1,10 +1,10 @@
-import { createSelectQuestion } from "./functions";
+import { createMultiSelectQuestion } from "./functions";
 
 export default {
   id: "pre-index-page-17",
   title: "Pre Index Data",
   questions: [
-    createSelectQuestion({
+    createMultiSelectQuestion({
       text: "pre_index Diabetes mellites treatment type",
       validValues: [
         "Metformin",

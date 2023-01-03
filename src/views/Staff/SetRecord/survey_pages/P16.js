@@ -3,6 +3,7 @@ import { createSelectQuestion, createYesNoQuestion } from "./functions";
 
 const diabetesMellitesTreatmentQuestion = createYesNoQuestion({
   text: "pre_index Diabetes mellites treatment",
+  isRequired: true,
 });
 
 export default {

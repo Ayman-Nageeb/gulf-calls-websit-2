@@ -1,10 +1,10 @@
-import { createCategoricalQuestion } from "./functions";
+import { createCategoricalQuestion, createMultiSelectQuestion } from "./functions";
 
 export default {
   id: "pre-index-page-15",
   title: "Pre Index Data",
   questions: [
-    createCategoricalQuestion({
+    createMultiSelectQuestion({
       text: "pre_index Omega 3 treatment type",
       validValues: [
         "Epanova (omega-3-carboxylic acids)",

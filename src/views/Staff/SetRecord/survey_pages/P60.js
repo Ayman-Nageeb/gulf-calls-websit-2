@@ -4,6 +4,7 @@ import { createCategoricalQuestion } from "./functions";
 const PCSK9TreatmentTypeQuestion = createCategoricalQuestion({
   text: "postindex PCSK9 treatment type",
   validValues: ["Alirocumab", "Evolocumab"],
+  isRequired: true,
 });
 export default {
   id: "post-index-page-60",

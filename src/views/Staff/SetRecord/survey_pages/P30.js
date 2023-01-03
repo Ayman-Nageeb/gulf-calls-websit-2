@@ -3,6 +3,7 @@ import { createCategoricalQuestion } from "./functions";
 const fibrateTreatmetnTypeQuestion = createCategoricalQuestion({
   text: "index Fibrate treatment type",
   validValues: ["Fenofibrate", "Gemfibrozil", "Bizafibrate"],
+  isRequired: true,
 });
 export default {
   id: "index-page-30",

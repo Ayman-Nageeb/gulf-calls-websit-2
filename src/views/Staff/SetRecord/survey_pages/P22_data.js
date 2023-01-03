@@ -8,6 +8,7 @@ import {
 const measuringQuestion = createCategoricalQuestion({
   text: "index Unit used for measuring",
   validValues: ["mmol/l", "mg/dl"],
+  isRequired: true,
 });
 
 export default {
@@ -43,12 +44,29 @@ export default {
     createYesNoQuestion({ text: "index Hypertension" }),
     createYesNoQuestion({ text: "index Dyslipidemia/hyperlipidemia" }),
     createYesNoQuestion({ text: "index Smoking" }),
+    createYesNoQuestion({ text: "index Ex-Smoker" }),
     createYesNoQuestion({ text: "index Heart Failure (HF)" }),
     createYesNoQuestion({ text: "index Chronic Kidney Disease (CKD)" }),
     createYesNoQuestion({
       text: "index Chronic Obstructive Pulmonary Disease (COPD)",
     }),
     createYesNoQuestion({ text: "index Cancer" }),
+    createYesNoQuestion({
+      text: "pre_index Myocardial Infarction (MI)",
+    }),
+    createYesNoQuestion({
+      text: "pre_index Percutaneous Coronary Intervention (PCI)",
+    }),
+    createYesNoQuestion({
+      text: "pre_index Coronary Artery Bypass Grafting (CABG)",
+    }),
+    createYesNoQuestion({
+      text: "pre_index Ischemic Stroke (IS)",
+    }),
+    createYesNoQuestion({
+      text: "pre_index Peripheral Artery Disease (PAD)",
+    }),
+    createYesNoQuestion({ text: "pre_index Carotid Artery disease" }),
     measuringQuestion,
   ],
   next() {

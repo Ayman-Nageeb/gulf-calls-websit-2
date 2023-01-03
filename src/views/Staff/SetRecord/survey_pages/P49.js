@@ -14,6 +14,7 @@ const statinTreatmentTypeQuestion = createSelectQuestion({
   ],
   hasCustom: true,
   radioView: true,
+  isRequired: true,
 });
 export default {
   id: "post-index-page-49",
