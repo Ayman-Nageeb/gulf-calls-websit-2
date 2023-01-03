@@ -14,10 +14,12 @@ import P20 from "./P20";
 import P21 from "./P21";
 import P22 from "./P22";
 import P22_data from "./P22_data";
+import P22_data_1 from "./P22_data_1";
 import P22_has_coronary_vessel_disease from "./P22_has_coronary_vessel_disease";
 import P23 from "./P23";
 import P24 from "./P24";
 import P25 from "./P25";
+import P25_1 from "./P25_1";
 import P26 from "./P26";
 import P27 from "./P27";
 import P28 from "./P28";
@@ -40,9 +42,11 @@ import P42 from "./P42";
 import P43 from "./P43";
 import P44 from "./P44";
 import P45 from "./P45";
+import P45_1 from "./P45_1";
 import P46 from "./P46";
 import P47 from "./P47";
 import P48 from "./P48";
+import P48_1 from "./P48_1";
 import P49 from "./P49";
 import P5 from "./P5";
 import P50 from "./P50";
@@ -102,8 +106,9 @@ export const indexClinicalPages = [
   P22_has_coronary_vessel_disease,
   P22_data,
 ];
-export const indexLabPages = [P23, P24, P25];
+export const indexLabPages = [P22_data_1, P23, P24, P25];
 export const indexTreatmentPages = [
+  P25_1,
   P26,
   P27,
   P28,
@@ -147,8 +152,9 @@ export const indexPages = [
 ];
 
 export const postIndexClinicalPages = [P42, P43, P44, P45];
-export const postIndexLabPages = [P46, P47, P48];
+export const postIndexLabPages = [P45_1, P46, P47, P48];
 export const postIndexTreatmentPages = [
+  P48_1,
   P49,
   P50,
   P51,

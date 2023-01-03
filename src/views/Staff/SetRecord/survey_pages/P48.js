@@ -1,10 +1,5 @@
-import store from "@/store";
-import { createNumericalQuestion, createYesNoQuestion } from "./functions";
+import { createNumericalQuestion } from "./functions";
 
-const statinTreatmentQuestion = createYesNoQuestion({
-  text: "Post index Statin treatment",
-  isRequired: true,
-});
 export default {
   id: "post-index-page-48",
   title: "Post Index Data",
@@ -24,14 +19,6 @@ export default {
       range: { min: 0, max: 500, step: 1 },
       unit: "",
     }),
-    statinTreatmentQuestion,
   ],
-  next() {
-    const statinTreatment =
-      store.getters["Records/selectedRecord"][statinTreatmentQuestion.id()];
-    if (statinTreatment.trim().toLowerCase() == "no") {
-      return "post-index-page-52";
-    }
-    return "post-index-page-49";
-  },
+  next: "post-index-page-48-1",
 };

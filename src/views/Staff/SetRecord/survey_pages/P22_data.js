@@ -1,15 +1,4 @@
-import store from "@/store";
-import {
-  createCategoricalQuestion,
-  createNumericalQuestion,
-  createYesNoQuestion,
-} from "./functions";
-
-const measuringQuestion = createCategoricalQuestion({
-  text: "index Unit used for measuring",
-  validValues: ["mmol/l", "mg/dl"],
-  isRequired: true,
-});
+import { createNumericalQuestion, createYesNoQuestion } from "./functions";
 
 export default {
   id: "index-page-22-data",
@@ -69,17 +58,6 @@ export default {
     createYesNoQuestion({
       text: "pre_index Carotid Artery disease (CAD) or stint",
     }),
-    measuringQuestion,
   ],
-  next() {
-    const measuringUnit =
-      store.getters["Records/selectedRecord"][measuringQuestion.id()];
-    if (measuringUnit == "mmol/l") {
-      return "mmol_l-index-data-page-23";
-    }
-    if (measuringUnit == "mg/dl") {
-      return "mg_dl-index-data-page-24";
-    }
-    return "basic-data";
-  },
+  next: "basic-data",
 };

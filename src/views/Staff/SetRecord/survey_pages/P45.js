@@ -1,15 +1,4 @@
-import store from "@/store";
-import {
-  createCategoricalQuestion,
-  createNumericalQuestion,
-  createYesNoQuestion,
-} from "./functions";
-
-const measuringQuestion = createCategoricalQuestion({
-  text: "post index Unit used for measuring",
-  validValues: ["mmol/l", "mg/dl"],
-  isRequired: true,
-});
+import { createNumericalQuestion, createYesNoQuestion } from "./functions";
 
 export default {
   id: "post-index-page-45",
@@ -50,17 +39,6 @@ export default {
       text: "post_index Chronic Obstructive Pulmonary Disease (COPD)",
     }),
     createYesNoQuestion({ text: "post_index Cancer" }),
-    measuringQuestion,
   ],
-  next() {
-    const measuringUnit =
-      store.getters["Records/selectedRecord"][measuringQuestion.id()];
-    if (measuringUnit == "mmol/l") {
-      return "mmol_l-post_index-data-page-46";
-    }
-    if (measuringUnit == "mg/dl") {
-      return "mg_dl-post_index-data-page-47";
-    }
-    return "basic-data";
-  },
+  next: "post-index-page-45-1",
 };

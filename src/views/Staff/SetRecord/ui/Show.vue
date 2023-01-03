@@ -112,7 +112,7 @@
               <v-list-item
                 :to="{
                   name: 'Records.Index.Lab.Set',
-                  params: { id: patient.code, pageId: 'mmol_l-index-data-page-23' },
+                  params: { id: patient.code, pageId: 'index-page-22-1-data' },
                 }"
               >
                 <v-list-item-title> Lab </v-list-item-title>
@@ -120,7 +120,7 @@
               <v-list-item
                 :to="{
                   name: 'Records.Index.Treatment.Set',
-                  params: { id: patient.code, pageId: 'index-page-26' },
+                  params: { id: patient.code, pageId: 'index-page-25-1' },
                 }"
               >
                 <v-list-item-title> Treatment </v-list-item-title>
@@ -145,7 +145,7 @@
                 color="#fe7504"
                 x-large
               >
-              Set Post-Index Data
+                Set Post-Index Data
               </v-btn>
             </template>
             <v-list color="#fe7504" dark>
@@ -160,7 +160,10 @@
               <v-list-item
                 :to="{
                   name: 'Records.PostIndex.Lab.Set',
-                  params: { id: patient.code, pageId: 'mmol_l-post_index-data-page-46' },
+                  params: {
+                    id: patient.code,
+                    pageId: 'post-index-page-45-1',
+                  },
                 }"
               >
                 <v-list-item-title> Lab </v-list-item-title>
@@ -168,14 +171,13 @@
               <v-list-item
                 :to="{
                   name: 'Records.PostIndex.Treatment.Set',
-                  params: { id: patient.code, pageId: 'post-index-page-49' },
+                  params: { id: patient.code, pageId: 'post-index-page-48-1' },
                 }"
               >
                 <v-list-item-title> Treatment </v-list-item-title>
               </v-list-item>
             </v-list>
           </v-menu>
-          
         </v-card-title>
       </v-card>
     </v-container>
