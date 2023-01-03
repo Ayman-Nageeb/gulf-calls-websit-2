@@ -26,7 +26,7 @@ export default {
     }),
     createNumericalQuestion({
       text: "index Lipoprotein a (Lpa) (nmol/L)",
-      range: { min: 1, max: 1000, step: 0.1 },
+      range: { min: 7, max: 500, step: 0.1 },
       unit: "(Lpa) (nmol/L)",
     }),
     createNumericalQuestion({
