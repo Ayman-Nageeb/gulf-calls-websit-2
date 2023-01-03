@@ -23,7 +23,7 @@ export default {
     }),
     createNumericalQuestion({
       text: "post_index Height (cm)",
-      range: { min: 1, max: 500, step: 1 },
+      range: { min: 120, max: 300, step: 1 },
       unit: "Kg",
     }),
     createNumericalQuestion({
