@@ -56,6 +56,7 @@ export default {
         "Bachelor’s degree",
         "Master’s degree",
         "Doctoral degree",
+        "Non of the above",
       ],
     }),
   ],

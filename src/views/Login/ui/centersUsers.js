@@ -11,6 +11,49 @@ const omanFirstCenterUser = {
   token:
     "nOXaVvx4Uozua3scGNIMbCYpX3iYaN94GV=VyOihbkmHWtA0XsPEL/5e?zMLTch!AgkwuHyWCdkB2tQzrEm1F0hkTi=1G8SnkFb9O!O3O49/u/mGh48qbHczkPgaLMiazQSKkES5hLEOwhV8oX8dFlhtRyY-SeGHFtT3GTADQ7in3wQaoHz6EQyl=DpO/=5?TXQ/gXEr?WS!Thfw-GRv-EzKAVHB47=urQRvLXYucibAjW2sJHskUZi9UJZAvqwl",
 };
+
+const omanFirstCenterUser2 = {
+  email: "squh_center.u2@oman.com",
+  name: "Oman SQUH center user 2",
+  password: "squh_2@oman123",
+  center: {
+    name: "SQUH Center Oman",
+    number: 1,
+    country: "Oman",
+    country_code: "ON",
+  },
+  token:
+    "nOXaVvx4Uozua3scGNIMbCYpX3iYaN94GV=VyOihbkmHWtA0XsPEL/5e?zMLTch!AgkwuHyWCdkB2tQzrEm1F0hkTi=1G8SnkFb9O!O3O49/u/mGh48qbHczkPgaLMiazQSKkES5hLEOwhV8oX8dFlhtRyY-SeGHFtT3GTADQ7in3wQaoHz6EQyl=DpO/=5?TXQ/gXEr?WS!Thfw-GRv-EzKAVHB47=urQRvLXYucibAjW2sJHskUZi9UJZAvqwl",
+};
+
+const omanFirstCenterUser3 = {
+  email: "squh_center.u3@oman.com",
+  name: "Oman SQUH center user 3",
+  password: "squh_3@oman123",
+  center: {
+    name: "SQUH Center Oman",
+    number: 1,
+    country: "Oman",
+    country_code: "ON",
+  },
+  token:
+    "nOXaVvx4Uozua3scGNIMbCYpX3iYaN94GV=VyOihbkmHWtA0XsPEL/5e?zMLTch!AgkwuHyWCdkB2tQzrEm1F0hkTi=1G8SnkFb9O!O3O49/u/mGh48qbHczkPgaLMiazQSKkES5hLEOwhV8oX8dFlhtRyY-SeGHFtT3GTADQ7in3wQaoHz6EQyl=DpO/=5?TXQ/gXEr?WS!Thfw-GRv-EzKAVHB47=urQRvLXYucibAjW2sJHskUZi9UJZAvqwl",
+};
+
+const omanFirstCenterUser4 = {
+  email: "squh_center.u4@oman.com",
+  name: "Oman SQUH center user 4",
+  password: "squh_4@oman123",
+  center: {
+    name: "SQUH Center Oman",
+    number: 1,
+    country: "Oman",
+    country_code: "ON",
+  },
+  token:
+    "nOXaVvx4Uozua3scGNIMbCYpX3iYaN94GV=VyOihbkmHWtA0XsPEL/5e?zMLTch!AgkwuHyWCdkB2tQzrEm1F0hkTi=1G8SnkFb9O!O3O49/u/mGh48qbHczkPgaLMiazQSKkES5hLEOwhV8oX8dFlhtRyY-SeGHFtT3GTADQ7in3wQaoHz6EQyl=DpO/=5?TXQ/gXEr?WS!Thfw-GRv-EzKAVHB47=urQRvLXYucibAjW2sJHskUZi9UJZAvqwl",
+};
+
 const omanSecondCenterUser = {
   email: "rh_center@oman.com",
   name: "Oman RH center user ",
@@ -111,6 +154,9 @@ const adminAccount = {
 
 export const validUsers = [
   omanFirstCenterUser,
+  omanFirstCenterUser2,
+  omanFirstCenterUser3,
+  omanFirstCenterUser4,
   omanSecondCenterUser,
   uaeFirstCenterUser,
   uaeSecondCenterUser,
