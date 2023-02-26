@@ -105,6 +105,7 @@ import axios from "axios";
 import { indexPages as pages, DEFAULT_PAGE_ID } from "../survey_pages/index";
 
 import { validateQuestions } from "../../SetRecord/ui/validateQuestion";
+import validUsers from "@/views/Login/ui/centersUsers";
 export default {
   components: { QuestionView },
   data() {
@@ -144,6 +145,14 @@ export default {
       }
       return pages[0];
     },
+    getCreatorByEmail(email) {
+      for (let user of validUsers) {
+        if (email.trim().toLowerCase() == user.email.trim().toLowerCase()) {
+          return user;
+        }
+      }
+      return null;
+    },
     async next() {
       this.$store.commit("Records/invalidateAll");
 
@@ -155,7 +164,9 @@ export default {
 
       try {
         const data = this.$store.getters["Records/selectedRecord"];
-        const centerCode = "" + this.center.country_code + this.center.number;
+        const creator = this.getCreatorByEmail(this.$store.getters['Records/selectedRecord'].creator);
+        const centerCode =
+          "" + creator.center.country_code + creator.center.number;
         const patientId = data.id;
         const response = await axios.post(
           `/centers/${centerCode}/patients/${patientId}/`,

@@ -11,7 +11,7 @@ export default {
     }),
     createNumericalQuestion({
       text: "index Low-Density Lipoprotein-C (LDL-C) (mmol/L)",
-      range: { min: 1.8, max: 100, step: 0.1 },
+      range: { min: 1.8, max: 1.79, step: 0.1 },
       unit: "(LDL-C) (mmol/L)",
     }),
     createNumericalQuestion({
@@ -21,7 +21,7 @@ export default {
     }),
     createNumericalQuestion({
       text: "index Triglycide (TG) (mmol/L)",
-      range: { min: 0, max: 100, step: 0.1 },
+      range: { min: 0, max: 4.6, step: 0.1 },
       unit: "(TG) (mmol/L)",
     }),
     createNumericalQuestion({

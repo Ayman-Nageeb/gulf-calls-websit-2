@@ -1,10 +1,10 @@
-import { createCategoricalQuestion } from "./functions";
+import { createMultiSelectQuestion } from "./functions";
 
 export default {
   id: "index-page-39",
   title: "Index Data",
   questions: [
-    createCategoricalQuestion({
+    createMultiSelectQuestion({
       text: "index Hypertension treatment type",
       validValues: [
         "α-Blocker",

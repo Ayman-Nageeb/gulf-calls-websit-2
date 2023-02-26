@@ -18,7 +18,7 @@ export default {
       return "post-index-page-43";
     }
     if (anticoagulantTreatment.trim().toLowerCase() == "no") {
-      return "post-index-page-45";
+      return "post-index-page-44";
     }
     return "basic-data";
   },

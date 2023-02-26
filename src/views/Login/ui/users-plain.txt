@@ -4,6 +4,26 @@ name: "SQUH Center Oman user"
 
 ======================
 
+email: "squh_center.u2@oman.com"
+password: "squh_2@oman123"
+name: "SQUH Center Oman user 2"
+
+======================
+
+
+email: "squh_center.u3@oman.com"
+password: "squh_3@oman123"
+name: "SQUH Center Oman user 3"
+
+======================
+
+
+email: "squh_center.u4@oman.com"
+password: "squh_4@oman123"
+name: "SQUH Center Oman user 4"
+
+======================
+
 email: "rh_center@oman.com"
 name: "Oman RH center user "
 password: "rh@oman123"

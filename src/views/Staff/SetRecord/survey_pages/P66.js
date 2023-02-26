@@ -1,10 +1,10 @@
-import { createSelectQuestion } from "./functions";
+import { createMultiSelectQuestion } from "./functions";
 
 export default {
   id: "post-index-page-66",
   title: "Post Index Data",
   questions: [
-    createSelectQuestion({
+    createMultiSelectQuestion({
       text: "Post index Hypertension treatment type",
       validValues: [
         "α-Blocker",
@@ -18,7 +18,6 @@ export default {
         "Hypertension combination",
       ],
       hasCustom: true,
-      radioView: true,
     }),
   ],
   next: "post-index-page-67",

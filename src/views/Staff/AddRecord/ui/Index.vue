@@ -104,6 +104,8 @@ export default {
 
       try {
         const data = this.$store.getters["Records/selectedRecord"];
+        data.creator = this.$store.getters["User/user"].email;
+
         const centerCode = "" + this.center.country_code + this.center.number;
         let response = await axios.post(`/centers/${centerCode}/patients`, {
           data: JSON.stringify(data),
@@ -139,7 +141,8 @@ export default {
           params: { id: patient.code },
         });
       } catch (error) {
-        alert(error);
+        
+        alert(error.response.data.message);
       }
       this.loading = false;
     },

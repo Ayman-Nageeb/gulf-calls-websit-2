@@ -1,10 +1,10 @@
-import { createSelectQuestion } from "./functions";
+import { createMultiSelectQuestion } from "./functions";
 
 export default {
   id: "index-page-41",
   title: "Index Data",
   questions: [
-    createSelectQuestion({
+    createMultiSelectQuestion({
       text: "index Anticoagulant treatment type",
       validValues: [
         "Aspirin",
@@ -13,7 +13,6 @@ export default {
         "Warfarin",
       ],
       hasCustom: true,
-      radioView: true,  
     }),
   ],
   next: "post-index-page-42",

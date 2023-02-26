@@ -71,7 +71,7 @@
                 .toISOString()
                 .substr(0, 10)
             "
-            min="1950-01-01"
+            min="1850-01-01"
             @change="save"
           ></v-date-picker>
         </v-menu>

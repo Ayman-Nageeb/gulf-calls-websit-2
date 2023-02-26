@@ -20,5 +20,5 @@ export default {
       placeholder: "day/month/year",
     }),
   ],
-  next: "post-index-page-44",
+  next: "post-index-page-45",
 };

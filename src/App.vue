@@ -40,6 +40,29 @@
       </div>
     </v-app-bar>
     <v-main>
+      <v-snackbar
+        v-model="showSystemCustomAlert"
+        color="error"
+        top
+        center
+        multi-line
+        class="mt-16"
+      >
+        <span class="title">
+          {{ alertText }}
+        </span>
+
+        <template v-slot:action="{ attrs }">
+          <v-btn
+            dark
+            icon
+            v-bind="attrs"
+            @click="showSystemCustomAlert = false"
+          >
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </template>
+      </v-snackbar>
       <router-view />
     </v-main>
     <v-footer class="pa-0 ma-0">
@@ -57,8 +80,13 @@ export default {
   name: "App",
   data: () => ({
     bg: "transparent",
+    showSystemCustomAlert: false,
+    alertText: "",
   }),
   computed: {
+    showAppBar() {
+      return this.$store.getters["Supervisors/isAuthenticated"];
+    },
     transparentPages() {
       return ["HOME"];
     },
@@ -74,6 +102,7 @@ export default {
   },
   mounted() {
     this.changeColor();
+    window.alert = this.customAlert;
     window.onscroll = () => {
       this.changeColor();
     };
@@ -101,6 +130,10 @@ export default {
       } else {
         this.bg = "transparent";
       }
+    },
+    customAlert(message) {
+      this.alertText = message;
+      this.showSystemCustomAlert = true;
     },
   },
   watch: {

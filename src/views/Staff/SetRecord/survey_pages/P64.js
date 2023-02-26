@@ -1,10 +1,10 @@
-import { createSelectQuestion } from "./functions";
+import { createMultiSelectQuestion } from "./functions";
 
 export default {
   id: "post-index-page-64",
   title: "Post Index Data",
   questions: [
-    createSelectQuestion({
+    createMultiSelectQuestion({
       text: "Post index Diabetes mellites treatment type",
       validValues: [
         "Metformin",
@@ -14,7 +14,6 @@ export default {
         "SGLT2 inhibitors",
       ],
       hasCustom: true,
-      radioView: true,
     }),
   ],
   next: "post-index-page-65",

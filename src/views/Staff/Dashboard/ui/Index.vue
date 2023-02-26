@@ -105,6 +105,9 @@
             class="elevation-0"
             :search="search"
           >
+            <template v-slot:[`item.age`]="{ item }">
+              <span> {{ item.age }} Years </span>
+            </template>
             <template v-slot:[`item.code`]="{ item }">
               <v-btn route color="#536dfe" text @click="goSetRecordData(item)">
                 {{ item.code }}
@@ -144,6 +147,17 @@ export default {
     }
   },
   methods: {
+    calcAge(birthDate) {
+      birthDate = new Date(birthDate);
+      const today = new Date();
+      const age =
+        today.getFullYear() -
+        birthDate.getFullYear() -
+        (today.getMonth() < birthDate.getMonth() ||
+          (today.getMonth() === birthDate.getMonth() &&
+            today.getDate() < birthDate.getDate()));
+      return age;
+    },
     goSetRecordData(record) {
       this.$store.commit("Records/setRecord", record);
       this.$router.replace({
@@ -160,6 +174,8 @@ export default {
         const patients = [];
         for (let d of data) {
           d.data = JSON.parse(d.data);
+          if (d.data.creator !== this.user.email) continue;
+          d.data.age = this.calcAge(d.data.date_of_birth);
           d = Object.assign(
             { id: d.id, created_at: d.created_at, updated_at: d.updated_at },
             d.data

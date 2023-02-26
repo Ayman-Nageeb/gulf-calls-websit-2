@@ -48,12 +48,7 @@
             :search="search"
           >
             <template v-slot:[`item.code`]="{ item }">
-              <v-btn
-                route
-                color="#536dfe"
-                text
-                @click="goSetRecordData(item)"
-              >
+              <v-btn route color="#536dfe" text @click="goSetRecordData(item)">
                 {{ item.code }}
               </v-btn>
             </template>
@@ -110,6 +105,7 @@ export default {
         const patients = [];
         for (let d of data) {
           d.data = JSON.parse(d.data);
+          
           d = Object.assign(
             { id: d.id, created_at: d.created_at, updated_at: d.updated_at },
             d.data

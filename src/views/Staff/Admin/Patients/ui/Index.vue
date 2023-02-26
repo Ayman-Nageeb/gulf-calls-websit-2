@@ -1,5 +1,13 @@
 <template>
   <div>
+    <confirm-delete
+      :show="showDelete"
+      @cancel="
+        recodeToRemove = null;
+        showDelete = false;
+      "
+      @confirm="removeRecord"
+    />
     <v-container style="max-width: 1080px">
       <v-card-title>
         <v-spacer></v-spacer>
@@ -20,7 +28,7 @@
         <v-card-title>
           latest record code:
           <span style="color: #536dfe" class="ml-2">{{
-            patients.length > 0 ? patients[0].code : 'NA'
+            patients.length > 0 ? patients[0].code : "NA"
           }}</span>
           <v-spacer></v-spacer>
           {{ patients.length }} Records
@@ -77,6 +85,21 @@
                 {{ item.code }}
               </v-btn>
             </template>
+            <template v-slot:[`item.age`]="{ item }">
+              <span> {{ item.age }} Years </span>
+            </template>
+            <template v-slot:[`item.id`]="{ item }">
+              <v-btn
+                icon
+                color="error"
+                @click="
+                  recodeToRemove = item;
+                  showDelete = true;
+                "
+              >
+                <v-icon>mdi-trash-can-outline</v-icon>
+              </v-btn>
+            </template>
           </v-data-table>
         </v-card-text>
       </v-card>
@@ -86,8 +109,11 @@
 
 <script>
 import axios from "axios";
+import ConfirmDelete from "@/components/ConfirmDelete.vue";
+import validUsers from "@/views/Login/ui/centersUsers";
 
 export default {
+  components: { ConfirmDelete },
   created() {
     if (!this.$store.getters["User/isAuthenticated"]) {
       this.$router.push({ name: "Login" });
@@ -98,6 +124,8 @@ export default {
     search: "",
     patients: [],
     loading: false,
+    showDelete: false,
+    recodeToRemove: null,
   }),
   computed: {
     user() {
@@ -112,7 +140,8 @@ export default {
         { text: "Age", value: "age" },
         { text: "Gender", value: "gender" },
         { text: "Nationality", value: "nationality" },
-        { text: "Education", value: "education", align: "right" },
+        { text: "Education", value: "education" },
+        { text: "Remove", value: "id", align: "right" },
       ];
       return headers;
     },
@@ -123,6 +152,17 @@ export default {
       this.$router.push({ name: "Home" });
       return;
     },
+    calcAge(birthDate) {
+      birthDate = new Date(birthDate);
+      const today = new Date();
+      const age =
+        today.getFullYear() -
+        birthDate.getFullYear() -
+        (today.getMonth() < birthDate.getMonth() ||
+          (today.getMonth() === birthDate.getMonth() &&
+            today.getDate() < birthDate.getDate()));
+      return age;
+    },
     async getPatients() {
       this.loading = true;
       try {
@@ -131,6 +171,7 @@ export default {
         const patients = [];
         for (let d of data) {
           d.data = JSON.parse(d.data);
+          d.data.age = this.calcAge(d.data.date_of_birth);
           d = Object.assign(
             { id: d.id, created_at: d.created_at, updated_at: d.updated_at },
             d.data
@@ -143,6 +184,32 @@ export default {
         alert(error);
       }
       this.loading = false;
+    },
+    getCreatorByEmail(email) {
+      for (let user of validUsers) {
+        if (email.trim().toLowerCase() == user.email.trim().toLowerCase()) {
+          return user;
+        }
+      }
+      return null;
+    },
+    async removeRecord() {
+      this.showDelete = false;
+      this.loading = true;
+      const creator = this.getCreatorByEmail(this.recodeToRemove.creator);
+      const centerCode =
+        "" + creator.center.country_code + creator.center.number;
+
+      try {
+        await axios.delete(
+          `/centers/${centerCode}/patients/${this.recodeToRemove.id}`
+        );
+        this.recodeToRemove = null;
+      } catch (error) {
+        alert(error);
+      }
+      this.loading = false;
+      this.getPatients();
     },
   },
 };

@@ -56,7 +56,7 @@ export default {
       text: "pre_index Peripheral Artery Disease (PAD)",
     }),
     createYesNoQuestion({
-      text: "pre_index Carotid Artery disease (CAD) or stint",
+      text: "pre_index Carotid Artery disease (CAD) or stent",
     }),
   ],
   next: "basic-data",
