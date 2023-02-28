@@ -126,30 +126,7 @@ export const indexTreatmentPages = [
   P40,
   P41,
 ];
-export const indexPages = [
-  P22,
-  P22_has_coronary_vessel_disease,
-  P22_data,
-  P23,
-  P24,
-  P25,
-  P26,
-  P27,
-  P28,
-  P29,
-  P30,
-  P31,
-  P32,
-  P33,
-  P34,
-  P35,
-  P36,
-  P37,
-  P38,
-  P39,
-  P40,
-  P41,
-];
+
 
 export const postIndexClinicalPages = [P42, P43, P44, P45];
 export const postIndexLabPages = [P45_1, P46, P47, P48];
@@ -177,6 +154,32 @@ export const postIndexTreatmentPages = [
   P68,
   P69,
 ];
+
+export const indexPages = [
+  P22,
+  P22_has_coronary_vessel_disease,
+  P22_data,
+  P23,
+  P24,
+  P25,
+  P26,
+  P27,
+  P28,
+  P29,
+  P30,
+  P31,
+  P32,
+  P33,
+  P34,
+  P35,
+  P36,
+  P37,
+  P38,
+  P39,
+  P40,
+  P41,
+];
+
 export const postIndexPages = [
   P42,
   P43,

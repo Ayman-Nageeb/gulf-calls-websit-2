@@ -208,7 +208,7 @@ export default {
         if (nextId instanceof Function) nextId = this.selectedPage.next();
 
         this.$router.push({
-          name: "Records.PostIndex.Set",
+          name: "Records.PostIndex.Treatment.Set",
           params: { id: patient.code, pageId: nextId },
         });
       } catch (error) {

@@ -13,6 +13,8 @@
           <v-btn icon large color="secondary" @click="goBack">
             <v-icon>mdi-arrow-left</v-icon>
           </v-btn>
+          
+
           <v-spacer></v-spacer>
           Set Record Data [<span
             style="color: #536dfe"
@@ -40,6 +42,7 @@
           <v-container style="max-width: 1080px">
             <p class="title mb-6">
               {{ selectedPage.title }} ({{ questions.length }} Questions)
+              
             </p>
             <div class="my-3"></div>
             <div v-for="(q, i) of questions" :key="i">
@@ -48,6 +51,7 @@
           </v-container>
         </v-card-text>
         <v-divider></v-divider>
+        
         <v-card-actions>
           <v-container style="max-width: 1080px">
             <v-card-actions class="pa-0 ma-0">
@@ -167,7 +171,9 @@ export default {
 
       try {
         const data = this.$store.getters["Records/selectedRecord"];
-        const creator = this.getCreatorByEmail(this.$store.getters['Records/selectedRecord'].creator);
+        const creator = this.getCreatorByEmail(
+          this.$store.getters["Records/selectedRecord"].creator
+        );
         const centerCode =
           "" + creator.center.country_code + creator.center.number;
         const patientId = data.id;
@@ -208,7 +214,7 @@ export default {
         if (nextId instanceof Function) nextId = this.selectedPage.next();
 
         this.$router.push({
-          name: "Records.PostIndex.Set",
+          name: "Records.PostIndex.Clinical.Set",
           params: { id: patient.code, pageId: nextId },
         });
       } catch (error) {

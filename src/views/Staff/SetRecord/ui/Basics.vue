@@ -156,6 +156,8 @@ export default {
     async next() {
       this.$store.commit("Records/invalidateAll");
 
+      
+
       if (!validateQuestions(this.questions)) {
         this.$store.commit("Records/validateAll");
         return;

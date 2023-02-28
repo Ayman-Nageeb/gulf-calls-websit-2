@@ -4,7 +4,7 @@ export const validateQuestions = function (questions) {
   for (let q of questions) {
     console.log("validating question :", q.type);
     console.log("validating question :", q.id());
-    if (!q.isRequired) return true;
+    if (!q.isRequired) continue;
     switch (q.type.toLocaleLowerCase()) {
       case "numeric":
         if (!validateNumericalQuestion(q)) return false;

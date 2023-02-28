@@ -16,7 +16,7 @@
         >
           <v-icon> mdi-view-dashboard </v-icon>
           <span class="mx-1"></span>
-          Goto Dashboard
+          Go To Dashboard
         </v-btn>
         <v-spacer></v-spacer>
       </v-card-title>

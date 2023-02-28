@@ -29,7 +29,7 @@
             {{
               $store.getters["User/isAuthenticated"] != true
                 ? "Staff login"
-                : "Goto Dashboard"
+                : "Go To Dashboard"
             }}
           </v-btn>
           <v-spacer></v-spacer>
