@@ -11,7 +11,7 @@ export default {
     }),
     createNumericalQuestion({
       text: "index Low-Density Lipoprotein-C (LDL-C) (mg/dl)",
-      range: { min: 0, max: 69, step: 0.1 },
+      range: { min: 70, max: 100, step: 0.1 },
       unit: "(mg/dl)",
     }),
     createNumericalQuestion({
