@@ -8,7 +8,7 @@ export default {
       text: "Post index Omega 3 treatment type",
       validValues: [
         "Epanova (omega-3-carboxylic acids)",
-        "Lovaza (omega-3-acid ethyl esters).",
+        "Omacor (omega-3-acid ethyl esters).",
         "Omtryg: (omega-3-acid ethyl esters)",
         "Vascepa (icosapent ethyl).",
       ],
