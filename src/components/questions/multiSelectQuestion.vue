@@ -29,7 +29,7 @@
       </v-card-title>
       <v-card-text>
         <p>{{ question.placeholder }}</p>
-
+      
         <v-card
           :dark="value.includes(q)"
           outlined
@@ -55,6 +55,19 @@
               readonly
             ></v-checkbox>
           </span>
+        </v-card>
+      </v-card-text>
+      <v-card-text class="pa-6" >
+        <v-card outlined class="pa-4" style="border: 2px solid blue">
+          <p>Add Other</p>
+          <v-text-field
+            outlined
+            class="my-4"
+            v-model="customValue"
+            placeholder="add new value"
+            hide-details="true"
+            @keyup.enter="addCustomValueToValues"
+          ></v-text-field>
         </v-card>
       </v-card-text>
     </v-card>
@@ -93,6 +106,10 @@ export default {
     this.validValues = this.question.validValues;
 
     this.value = this.questionValue || [];
+
+    for (let v of this.value) {
+      if (!this.validValues.includes(v)) this.validValues.push(v);
+    }
   },
   computed: {
     record() {
@@ -106,6 +123,13 @@ export default {
     },
   },
   methods: {
+    addCustomValueToValues() {
+      if (this.customValue && this.customValue.trim() !== "") {
+        this.validValues.push(this.customValue);
+        this.value.push(this.customValue);
+      }
+      this.customValue = null;
+    },
     updateValue() {
       if (this.validate()) {
         this.$store.commit("Records/setAttribute", {
